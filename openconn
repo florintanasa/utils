@@ -58,6 +58,6 @@ user_filter="${1:-}"  # Default to empty, filter can be passed as an argument
     else
         printf "%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\n" $filtered_line
     fi
-  done | sort -k3,3 -k1,1
+  done | sort -k3,3 -k1,1 -k2,2 # Sort by USER, COMMAND and PID
 }
 
