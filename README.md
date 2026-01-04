@@ -1,6 +1,6 @@
-# $\textcolor{cyan}{\textbf {Utils}}$
+# $\textcolor{teal}{\textbf {Utils}}$
 In this area there are useful scripts and wrappers.  
-## $\textcolor{cyan}{openconn}$
+## $\textcolor{teal}{openconn}$
 Is a wrapper to 'lsof -Pni{4,6}{TCP,UDP}' for show open connections.  
 **Install**
 ```bash
