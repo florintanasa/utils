@@ -19,7 +19,8 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE
 
 ## $\textcolor{red}{Warning}$
 
-Thees open-source pieces of software is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**.  
+Thees open-source pieces of software, from this area, is distributed in the hope that it will be useful, but 
+**WITHOUT ANY WARRANTY**.  
 A very good idea is to test first into virtual machine.
 
 I will back soon with more info...
