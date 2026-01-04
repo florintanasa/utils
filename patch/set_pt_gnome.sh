@@ -90,7 +90,7 @@ sudo -u $username sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[
 
 # Load modified configs from dconf.ini file
 printf "Load modified configs from dconf.ini file\n\n"
-sudo -u $username bash -c 'pid=$(pgrep -u $username -n gnome-shell);
+sudo -u $username bash -c 'pid=$(pgrep -u $USER -n gnome-shell);
 addr=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$pid/environ | cut -d= -f2- | tr -d "\0");
 export DBUS_SESSION_BUS_ADDRESS=$addr;
 dconf load / < dconf.ini'
