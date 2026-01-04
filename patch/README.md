@@ -1,6 +1,6 @@
-# Patch
+# $\textcolor{teal}{Patch}$
 Usefully patch for **BRGV-OS**  
-## set_pt_gnome.sh
+### $\textcolor{teal}{set_pt_gnome.sh}$
 This script add modification for user what use Portuguese (Brazil) language and add some packages for localize.  
 Translate:  
 
@@ -30,8 +30,9 @@ Packages:
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_gnome.sh
 chmod +x set_pt_gnome.sh
 sudo ./set_pt_gnome.sh
-```
-## set_distro.sh
+```  
+  
+### $\textcolor{teal}{set_distro.sh}$
 This script add modification at os-release and lsb_release file for **BRGV-OS**  
 **Usage**
 ```bash
