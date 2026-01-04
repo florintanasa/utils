@@ -1,7 +1,27 @@
 # Patch
 Usefully patch for **BRGV-OS**  
 ## set_pt_gnome.sh
-This script add modification for user what use Portuguese (Brazil) language  
+This script add modification for user what use Portuguese (Brazil) language and add some packages for localize.  
+Translate:  
+
+|     English     |       Portuguese       |
+|:---------------:|:----------------------:|
+| Themes settings | Configurações de temas |
+|     Office      |       Escritório       |
+|    Graphics     |        Gráficos        |
+|   Programming   |      Programação       |
+|   Accessories   |       Acessórios       |
+|     System      |        Sistema         |
+
+Packages:
+
+* firefox-i18n-pt-BR
+* libreoffice-i18n-pt-BR
+* mythes-pt_BR
+* hyphen-pt_BR
+* manpages-pt-br
+* hunspell-pt_BR
+  
 **Usage** 
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_gnome.sh
