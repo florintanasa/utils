@@ -2,6 +2,15 @@
 In this area there are useful scripts and wrappers.  
 ## $\textcolor{cyan}{openconn}$
 Is a wrapper to 'lsof -Pni{4,6}{TCP,UDP}' for show open connections.  
+**Install**
+```bash
+wget https://github.com/florintanasa/utils/raw/refs/heads/main/openconn
+chmod +x openconn
+sudo mv openconn /usr/local/bin/
+```
+**Usage**  
+Some examples on next screenshot:  
+  
 ![openconn](screenshots/openconn.png)
 
 ## $\textcolor{teal}{License}$
