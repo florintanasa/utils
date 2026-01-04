@@ -26,28 +26,7 @@
 # License GPLv3
 #-
 
-# Function to display help
-function display_help() {
-    echo -e "\033[1;36mUsage:\033[0m"
-    echo -e "  ./openconn.sh [ARGUMENT]"
-    echo -e "\nDescription:"
-    echo -e "  Lists open TCP and UDP connections."
-    echo -e "  If a username, command name, port or other column is provided as an ARGUMENT, only connections for that filter will be displayed."
-    echo -e "\nOptions:"
-    echo -e "  ARGUMENT\t\tFilter results to only show those belonging to the specified user, command name, port or other column."
-    echo -e "\nExamples:"
-    echo -e "  ./openconn.sh florin\t# List connections for user 'florin'"
-    echo -e "  ./openconn.sh cupsd\t# List connections for the 'cupsd' command"
-    echo -e "  ./openconn.sh :631\t# List connections using port 631"
-    echo -e "  ./openconn.sh\t\t# List all connections"
-    exit 0
-}
-
-# Check for help flag
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    display_help
-fi
-
+# Check if terminal support underlining
 if tput smul > /dev/null 2>&1; then
   underline=$(tput smul)
   reset=$(tput sgr0)
@@ -70,6 +49,28 @@ else
   yellow=""
   cyan=""
   reset=""
+fi
+
+# Function to display help
+function display_help() {
+    echo -e "${bold}${cyan}Usage:${reset}"
+    echo -e "  ./openconn.sh [ARGUMENT]"
+    echo -e "\nDescription:"
+    echo -e "  Lists open TCP and UDP connections."
+    echo -e "  If a username, command name, port or other column is provided as an ARGUMENT, only connections for that filter will be displayed."
+    echo -e "\nOptions:"
+    echo -e "  ARGUMENT\t\tFilter results to only show those belonging to the specified user, command name, port or other column."
+    echo -e "\nExamples:"
+    echo -e "  ./openconn.sh florin\t# List connections for user 'florin'"
+    echo -e "  ./openconn.sh cupsd\t# List connections for the 'cupsd' command"
+    echo -e "  ./openconn.sh :631\t# List connections using port 631"
+    echo -e "  ./openconn.sh\t\t# List all connections"
+    exit 0
+}
+
+# Check for help flag
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    display_help
 fi
 
 # Check if lsof is installed
