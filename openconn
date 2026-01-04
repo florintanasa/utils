@@ -53,46 +53,39 @@ fi
 
 # Function to display help
 function display_help() {
-    echo -e "${bold}${cyan}Usage:${reset}"
-    echo -e "  ./openconn.sh [ARGUMENT]"
-    echo -e "\nDescription:"
-    echo -e "  Lists open TCP and UDP connections."
-    echo -e "  If a username, command name, port or other column is provided as an ARGUMENT, only connections for that filter will be displayed."
-    echo -e "\nOptions:"
-    echo -e "  ARGUMENT\t\tFilter results to only show those belonging to the specified user, command name, port or other column."
-    echo -e "\nExamples:"
-    echo -e "  ./openconn.sh florin\t# List connections for user 'florin'"
-    echo -e "  ./openconn.sh cupsd\t# List connections for the 'cupsd' command"
-    echo -e "  ./openconn.sh :631\t# List connections using port 631"
-    echo -e "  ./openconn.sh\t\t# List all connections"
-    exit 0
+  echo -e "${bold}${cyan}Usage:${reset}"
+  echo -e "  ./openconn.sh [ARGUMENT]"
+  echo -e "\nDescription:"
+  echo -e "  Lists open TCP and UDP connections."
+  echo -e "  If a username, command name, port or other column is provided as an ARGUMENT, only connections for that filter will be displayed."
+  echo -e "\nOptions:"
+  echo -e "  ARGUMENT\t\tFilter results to only show those belonging to the specified user, command name, port or other column."
+  echo -e "\nExamples:"
+  echo -e "  ./openconn.sh florin\t# List connections for user 'florin'"
+  echo -e "  ./openconn.sh cupsd\t# List connections for the 'cupsd' command"
+  echo -e "  ./openconn.sh :631\t# List connections using port 631"
+  echo -e "  ./openconn.sh\t\t# List all connections"
+  exit 0
 }
 
 # Check for help flag
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-    display_help
+  display_help
 fi
 
 # Check if lsof is installed
-if ! command -v lsof &> /dev/null; then
-    echo -e "${bold}${red}Error: lsof is not installed.${reset}"  # Red for error
-    exit 1
+if ! command -v lsof &>/dev/null; then
+  echo -e "${bold}${red}Error: lsof is not installed.${reset}" # Red for error
+  exit 1
 fi
 
-user_filter="${1:-}"  # Default to empty, filter can be passed as an argument
+user_filter="${1:-}" # Default to empty, filter can be passed as an argument
 
 # Declare an array to hold the lines
 filtered_lines=()
 
-  # Check if running in a terminal that supports underlining
-  if tput smul > /dev/null 2>&1; then
-      underline="\033[4m"  # Underline for supporting terminals
-  else
-      underline=""  # No underline for non-supporting terminals
-  fi
-
-  # Print header with cyan formatting and underline
-  printf "${underline}${bold}${cyan}%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s${reset}\n" "COMMAND" "PID" "USER" "FD" "TYPE" "PROTO" "ADDRESS/PORT" "STATE"
+# Print header with cyan formatting and underline
+printf "${underline}${bold}${cyan}%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s${reset}\n" "COMMAND" "PID" "USER" "FD" "TYPE" "PROTO" "ADDRESS/PORT" "STATE"
 
 # Use a temporary variable to hold lsof output
 temp_output=$(lsof -Pni{4,6}{TCP,UDP} | sed '1d')
