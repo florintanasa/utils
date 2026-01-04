@@ -1,7 +1,8 @@
 # $`\textcolor{teal}{\texttt{Patch}}`$
 Usefully patch for **BRGV-OS**  
 ### $`\textcolor{teal}{\texttt{set\_pt\_gnome.sh}}`$
-This script add modification for user what use Portuguese (Brazil) language and add some packages for localize.  
+This script add modification for user what use Portuguese (Brazil) language, add default keyboard 'br' and add some 
+packages for localize.  
 Translate:  
 
 |     English     |       Portuguese       |
