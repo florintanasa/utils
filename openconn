@@ -56,6 +56,7 @@ else
   reset=""
 fi
 
+# Check if terminal support colors
 if tput colors > /dev/null 2>&1; then
   red=$(tput setaf 1)
   green=$(tput setaf 2)
