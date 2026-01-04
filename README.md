@@ -1,5 +1,5 @@
 # $\textcolor{cyan}{\textbf {Utils}}$
-In thees area are useful scripts and wrappers.  
+In this area there are useful scripts and wrappers.  
 ## $\textcolor{cyan}{openconn}$
 Is a wrapper to 'lsof -Pni{4,6}{TCP,UDP}' for show open connections.  
 ![openconn](screenshots/openconn.png)
