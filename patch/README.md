@@ -21,7 +21,10 @@ Packages:
 * hyphen-pt_BR
 * manpages-pt-br
 * hunspell-pt_BR
-  
+> [!NOTE]   
+> If the package is already installed give error message with the "package already installed"  
+> Is not a big problem.  
+
 **Usage** 
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_gnome.sh
