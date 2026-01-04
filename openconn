@@ -118,5 +118,3 @@ for line in "${sorted_lines[@]}"; do
     printf "$formatted_line\n" # Otherwise not colored
   fi
 done
-
-
