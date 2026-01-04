@@ -1,7 +1,7 @@
 # $\textcolor{cyan}{\textbf {Utils}}$
-In these area are useful scripts and wrappers.  
+In thees area are useful scripts and wrappers.  
 ## $\textcolor{cyan}{openconn}$
-Is a wrapper to 'lsof -Pni{4,6}{TCP,UDP}' for show open connection.  
+Is a wrapper to 'lsof -Pni{4,6}{TCP,UDP}' for show open connections.  
 ![openconn](screenshots/openconn.png)
 
 ## $\textcolor{teal}{License}$
