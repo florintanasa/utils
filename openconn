@@ -48,42 +48,80 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     display_help
 fi
 
+if tput smul > /dev/null 2>&1; then
+  underline=$(tput smul)
+  reset=$(tput sgr0)
+else
+  underline=""
+  reset=""
+fi
+
+if tput colors > /dev/null 2>&1; then
+  red=$(tput setaf 1)
+  green=$(tput setaf 2)
+  yellow=$(tput setaf 3)
+  cyan=$(tput setaf 6)
+  bold=$(tput bold)
+  reset=$(tput sgr0)
+else
+  red=""
+  green=""
+  yellow=""
+  cyan=""
+  reset=""
+fi
+
 # Check if lsof is installed
 if ! command -v lsof &> /dev/null; then
-    echo -e "\033[1;31mError: lsof is not installed.\033[0m"  # Red for error
+    echo -e "${bold}${red}Error: lsof is not installed.${reset}"  # Red for error
     exit 1
 fi
 
 user_filter="${1:-}"  # Default to empty, filter can be passed as an argument
 
-{
+# Declare an array to hold the lines
+filtered_lines=()
+
   # Check if running in a terminal that supports underlining
-  if [ -t 1 ]; then
+  if tput smul > /dev/null 2>&1; then
       underline="\033[4m"  # Underline for supporting terminals
   else
       underline=""  # No underline for non-supporting terminals
   fi
 
   # Print header with cyan formatting and underline
-  printf "${underline}\033[1;36m%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\033[0m\n" "COMMAND" "PID" "USER" "FD" "TYPE" "PROTO" "ADDRESS/PORT" "STATE"
+  printf "${underline}${bold}${cyan}%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s${reset}\n" "COMMAND" "PID" "USER" "FD" "TYPE" "PROTO" "ADDRESS/PORT" "STATE"
 
-  lsof -Pni{4,6}{TCP,UDP} | sed '1d' | \
-  while read -r line; do
-    # Remove DEVICE and SIZE/OFF fields (fields 6 and 7)
-    filtered_line=$(echo "$line" | awk '{ $6=""; $7=""; print $0 }' | sed 's/  */ /g')  # Replace multiple spaces with a single space
+# Use a temporary variable to hold lsof output
+temp_output=$(lsof -Pni{4,6}{TCP,UDP} | sed '1d')
 
-    if [[ -n "$user_filter" && "$filtered_line" != *"$user_filter"* ]]; then
-        continue  # Skip lines that don't match the user filter
-    fi
+# Process each line
+while read -r line; do
+  filtered_line=$(echo "$line" | awk '{ $6=""; $7=""; print $0 }' | sed 's/  */ /g')
 
-    # Print with formatting for each column
-    if echo "$filtered_line" | grep -q "TCP"; then
-        printf "\033[1;32m%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\033[0m\n" $filtered_line  # Green for "TCP"
-    elif echo "$filtered_line" | grep -q "UDP"; then
-        printf "\033[1;33m%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\033[0m\n" $filtered_line  # Yellow for "UDP"
-    else
-        printf "%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\n" $filtered_line
-    fi
-  done | sort -k3,3 -k1,1 -k2,2 # Sort by USER, COMMAND and PID
-}
+  if [[ -n "$user_filter" && "$filtered_line" != *"$user_filter"* ]]; then
+    continue
+  fi
+
+  # Store the line in the array
+  filtered_lines+=("$filtered_line")
+done <<< "$temp_output"
+
+# Sort the array based on USER, COMMAND, and PID
+IFS=$'\n' sorted_lines=($(sort -k3,3 -k1,1 -k2,2 <<< "${filtered_lines[*]}"))
+
+# Print sorted lines
+for line in "${sorted_lines[@]}"; do
+  # Use awk to split in fields
+  formatted_line=$(echo "$line" | awk '{printf("%-10s %-5s %-10s %-4s %-6s %-7s %-40s %-15s\n", $1, $2, $3, $4, $5, $6, $7, $8)}')
+
+  if echo "$line" | grep -q "TCP"; then
+    printf "${green}$formatted_line${reset}\n" # Green for TCP
+  elif echo "$line" | grep -q "UDP"; then
+    printf "${yellow}$formatted_line${reset}\n" # Yellow for UDP
+  else
+    printf "$formatted_line\n" # Otherwise not colored
+  fi
+done
+
 
