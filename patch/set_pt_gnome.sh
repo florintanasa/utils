@@ -95,6 +95,10 @@ addr=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$pid/environ | cut -d= -f2- | tr -
 export DBUS_SESSION_BUS_ADDRESS=$addr;
 dconf load / < dconf.ini'
 
+# Add other packages for Portuguese language
+printf "Add other packages for Portuguese (Brazil) language\n\n"
+xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
+
 # Final messages
 printf "${bold}${cyan}Finish and thanks for usage${reset}\n\n\n"
 printf "If is not ok, the old configs can be loaded using 'dconf load / < dconf.bak\n"
