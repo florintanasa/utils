@@ -1,7 +1,7 @@
 # $`\textcolor{teal}{\texttt{Patch}}`$
 Usefully patch for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void)  
 ### $`\textcolor{teal}{\texttt{set\_pt\_gnome.sh}}`$
-This script add modification for user what use Portuguese (Brazil) language, add default keyboard 'br' and add some 
+This script add modification for user what use Portuguese (Brazil) language, add default keyboard `br` and add some 
 packages for localize.  
 Translate:  
 
@@ -24,8 +24,7 @@ Packages:
 * hunspell-pt_BR
   
 > [!NOTE]   
-> If the package is already installed give error message with the "package already installed"  
-> Is not a big problem.  
+> If the package is already installed give error message with the "package already installed", these are not a problem.  
   
 **Require**  
 Is necessary to have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) in Portuguese (Brazil) 
