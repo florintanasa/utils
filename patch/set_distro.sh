@@ -25,18 +25,22 @@
 #
 # License GPLv3
 #-
-# check if is run as root
-if [ "$(id -u)" != "0" ]; then
-  echo "this script must run as root" 1>&2
+
+# Check if this script is run as root
+if [ "$(id -u)" -ne 0 ]; then
+  echo "This script must run as root" 1>&2
   exit 1
 fi
-# set variable
+
+# Set variables
 os_release="/usr/lib/os-release"
 lsb_release="/usr/bin/lsb_release"
-# First backup file
+
+# First make backups to the files
 cp /usr/lib/os-release /usr/lib/os-release.bak
 cp /usr/bin/lsb_release /usr/bin/lsb_release.bak
-# Second apply modification
+
+# Second apply modifications in files
 sed -i 's/NAME="Void"/NAME="BRGV-OS"/g' "$os_release"
 sed -i 's/PRETTY_NAME="Void Linux"/PRETTY_NAME="BRGV-OS Linux"/g' "$os_release"
 sed -i 's/HOME_URL=\"https:\/\/voidlinux.org\/\"/HOME_URL=\"https:\/\/github.com\/florintanasa\/brgvos-void\"/g' "$os_release"
