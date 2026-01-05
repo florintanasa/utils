@@ -3,6 +3,8 @@ Usefully patch for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void)
 ### $`\textcolor{teal}{\texttt{set\_pt\_gnome.sh}}`$
 This script add modification for user what use Portuguese (Brazil) language, add default keyboard `br` and add some 
 packages for localize.  
+With modification can be used for any language.  
+  
 Translate:  
 
 |     English     |       Portuguese       |
@@ -40,7 +42,12 @@ sudo ./set_pt_gnome.sh
 ```  
   
 ### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
-This script add modification at os-release and lsb_release file for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void)  
+This script add modification at os-release and lsb_release file for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void).   
+With modification can be used with any distribution.  
+  
+**Require**  
+To have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) with `base-files` version >= 0.146_1
+
 **Usage**
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_distro.sh
