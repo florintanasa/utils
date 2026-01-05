@@ -27,7 +27,7 @@ Packages:
 > If the package is already installed give error message with the "package already installed"  
 > Is not a big problem.  
   
-**Request**  
+**Require**  
 Is necessary to have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) in Portuguese (Brazil) 
 Language, from English image ISO, like @LinuXpert in next video review.  
   
