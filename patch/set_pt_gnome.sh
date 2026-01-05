@@ -105,7 +105,7 @@ xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-p
 
 # Final messages
 printf "${bold}${cyan}Finish and thanks for usage${reset}\n\n\n"
-printf "If is not ok, the old configs can be loaded using 'dconf load / < dconf.bak\n"
-printf "Also you have a backup files for 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the /root directory,\n"
-printf "this can be put back in /etc/dconf/db/local.d/ directory, but only if the patch is not applied correctly in your case\n"
-
+printf "If is not ok, the old configs can be loaded using 'dconf load / < dconf.bak'\n"
+printf "Also you have a backup files for 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the '/root' directory,\n"
+printf "this can be put back in '/etc/dconf/db/local.d/' directory and then run 'sudo dconf update', but only if the patch
+is not applied correctly in your case\n"
