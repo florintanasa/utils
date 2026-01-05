@@ -2,7 +2,7 @@
   
 Usefully patch for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void)  
 
-### $`\textcolor{teal}{\texttt{set\_pt\_gnome.sh}}`$  
+### $`\textcolor{teal}{\texttt{set\_pt\_BR\_gnome.sh}}`$  
   
 This script add modification for user what use Portuguese (Brazil) language, add default keyboard `br` and add some 
 packages for localize.  
