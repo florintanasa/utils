@@ -65,6 +65,10 @@ sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" /etc/dconf/db/local.d/1
 sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
 sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g"  /etc/dconf/db/local.d/01-input-sources
 
+# Update dconf database
+printf "Update dconf database\n"
+dconf update
+
 # Modify for Portuguese language in dconf (for actual user)
 # Generate dconf.ini file
 printf "Generate dconf.ini file\n"
