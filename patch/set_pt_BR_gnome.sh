@@ -31,81 +31,154 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
-# Set variables for formating
+# Set variables for text formating
 bold=$(tput bold)
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 
+# Set some variables
+app_folders="/etc/dconf/db/local.d/27-app-folders"
+extensions_arcmenu="/etc/dconf/db/local.d/12-extensions-arcmenu"
+input_sources="/etc/dconf/db/local.d/01-input-sources"
+
 # Get username
 username=$(logname)
 
-# First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory, if not already exist
-printf "Make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory, if not already exist\n"
-if [ ! -f /root/27-app-folders ]; then
-  cp /etc/dconf/db/local.d/27-app-folders /root/
-fi
-if [ ! -f /root/12-extensions-arcmenu ]; then
-  cp /etc/dconf/db/local.d/12-extensions-arcmenu /root/
-fi
-if [ ! -f /root/01-input-sources ]; then
-  cp /etc/dconf/db/local.d/01-input-sources /root/
-fi
+# Modify for Portuguese language in central/system dconf (for all new user)
+set_for_all_users() {
+  # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
+  # if not already exist
+  printf "Make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
+  if not already exist\n"
+  mkdir -p /root/backup
+  if [ ! -f /root/backup/27-app-folders ]; then
+    cp "$app_folders" /root/backup
+  fi
+  if [ ! -f /root/backup/12-extensions-arcmenu ]; then
+    cp "$extensions_arcmenu" /root/backup
+  fi
+  if [ ! -f /root/backup/01-input-sources ]; then
+    cp "$input_sources" /root/backup
+  fi
 
-# Modify for Portuguese language in central/system dconf (for new user)
-sed -i "s/name='Themes settings'/name='Configurações de temas'/g" /etc/dconf/db/local.d/27-app-folders
-sed -i "s/name='Office'/name='Escritório'/g" /etc/dconf/db/local.d/27-app-folders
-sed -i "s/name='Graphics'/name='Gráficos'/g" /etc/dconf/db/local.d/27-app-folders
-sed -i "s/name='Programming'/name='Programação'/g" /etc/dconf/db/local.d/27-app-folders
-sed -i "s/name='Accessories'/name='Acessórios'/g" /etc/dconf/db/local.d/27-app-folders
-sed -i "s/'name': 'Programming'/'name': 'Programação'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/'name': 'System'/'name': 'Sistema'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/'name': 'Office'/'name': 'Escritório'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" /etc/dconf/db/local.d/12-extensions-arcmenu
-sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g"  /etc/dconf/db/local.d/01-input-sources
+  # Modify for Portuguese language in central/system dconf (for new user)
+  sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$app_folders"
+  sed -i "s/name='Office'/name='Escritório'/g" "$app_folders"
+  sed -i "s/name='Graphics'/name='Gráficos'/g" "$app_folders"
+  sed -i "s/name='Programming'/name='Programação'/g" "$app_folders"
+  sed -i "s/name='Accessories'/name='Acessórios'/g" "$app_folders"
+  sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$extensions_arcmenu"
+  sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
 
-# Update dconf database
-printf "Update dconf database\n"
-dconf update
+  # Update dconf database
+  printf "Update dconf database\n"
+  dconf update
+}
 
 # Modify for Portuguese language in dconf (for actual user)
-# Generate dconf.ini file
-printf "Generate dconf.ini file\n"
-sudo -u $username dconf dump / > dconf.ini
+set_for_current_user() {
+  # Generate dconf.ini file
+  printf "Generate dconf.ini file\n"
+  sudo -u "$username" mkdir -p /home/"$username"/backup
+  dconf_file="/home/$username/backup/dconf.ini"
+  sudo -u "$username" dconf dump / >"$dconf_file"
 
-# Make backup for dconf.ini
-printf "Make backup for dconf.ini into dconf.bak file\n"
-sudo -u $username cp dconf.ini dconf.bak
-# Now modify in dconf.ini file groups programming name for Portuguese language
-printf "Now modify in dconf.ini file groups programming name for Portuguese language\n"
-sudo -u $username sed -i "s/name='Themes settings'/name='Configurações de temas'/g" dconf.ini
-sudo -u $username sed -i "s/name='Office'/name='Escritório'/g" dconf.ini
-sudo -u $username sed -i "s/name='Graphics'/name='Gráficos'/g" dconf.ini
-sudo -u $username sed -i "s/name='Programming'/name='Programação'/g" dconf.ini
-sudo -u $username sed -i "s/name='Accessories'/name='Acessórios'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'Programming'/'name': 'Programação'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'System'/'name': 'Sistema'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'Office'/'name': 'Escritório'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" dconf.ini
-sudo -u $username sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" dconf.ini
-sudo -u $username sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" dconf.ini
+  # Make backup for dconf.ini
+  printf "Make backup for dconf.ini into dconf.bak file\n"
+  sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+  # Now modify in dconf.ini file groups programming name for Portuguese language
+  printf "Now modify in dconf.ini file groups programming name for Portuguese language\n"
+  sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
 
-# Load modified configs from dconf.ini file
-printf "Load modified configs from dconf.ini file\n\n"
-sudo -u $username bash -c 'pid=$(pgrep -u $USER -n gnome-shell);
-addr=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$pid/environ | cut -d= -f2- | tr -d "\0");
-export DBUS_SESSION_BUS_ADDRESS=$addr;
-dconf load / < dconf.ini'
+  # Load modified configs from dconf.ini file
+  printf "Load modified configs from dconf.ini file\n\n"
+  sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+export DBUS_SESSION_BUS_ADDRESS=\$addr;
+dconf load / < \"$dconf_file\""
+}
 
-# Add other packages for Portuguese language
-printf "Add other packages for Portuguese (Brazil) language\n\n"
-xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
+set_localize_packages() {
+  # Add other packages for Portuguese language
+  printf "Add other packages for Portuguese (Brazil) language\n\n"
+  xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
+}
 
 # Final messages
 printf "${bold}${cyan}Finish and thanks for usage${reset}\n\n\n"
-printf "If is not ok, the old configs can be loaded using 'dconf load / < dconf.bak'\n"
+printf "If is not ok, the old configs can be loaded using 'dconf load / < "$HOME"/backup/dconf.bak'\n"
 printf "Also you have a backup files for 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the '/root' directory,\n"
 printf "this can be put back in '/etc/dconf/db/local.d/' directory and then run 'sudo dconf update', but only if the patch
 is not applied correctly in your case\n"
+
+# Check if was sent a parameter
+if [ $# -eq 0 ]; then
+  echo "Please select an option from menu:"
+
+  select opt in "Modify for Portuguese language in system dconf (for all new user)" \
+  "Modify for Portuguese language in dconf (for actual user)" \
+  "Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)" "Exit"; do
+    case $opt in
+    "Modify for Portuguese language in system dconf (for all new user)")
+      echo "You choose Modify for Portuguese language in central/system dconf (for all new user)."
+      set_for_all_users
+      set_localize_packages
+      break
+      ;;
+    "Modify for Portuguese language in dconf (for actual user)")
+      echo "You choose Modify for Portuguese language in dconf (for actual user)."
+      set_for_current_user
+      set_localize_packages
+      break
+      ;;
+    "Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)")
+      echo "You choose Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)."
+      set_for_current_user
+      set_localize_packages
+      break
+      ;;
+    "Exit")
+      echo "Exit from menu."
+      break
+      ;;
+    *)
+      echo "Invalid option, please try once again."
+      ;;
+    esac
+  done
+else
+  # Dacă un parametru a fost furnizat, il executăm direct
+  if [[ "$1" == "1" && "$2" == "2" ]]; then
+    echo "You choose Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)."
+    set_for_all_users
+    set_for_current_user
+    set_localize_packages
+  elif [ "$1" == "1" ]; then
+    echo "You choose Modify for Portuguese language in central/system dconf (for all new user)."
+    set_for_all_users
+    set_localize_packages
+  elif [ "$1" == "2" ]; then
+    echo "You choose Modify for Portuguese language in dconf (for actual user)."
+    set_for_current_user
+    set_localize_packages
+  else
+    echo "Parametru invalid. Te rog să utilizezi ca parametri numerele '1' pentru Modify for Portuguese language in
+    central/system dconf (for all new user) sau '2' pentru Modify for Portuguese language in dconf (for actual user)."
+  fi
+fi
