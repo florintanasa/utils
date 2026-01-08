@@ -131,7 +131,7 @@ in the '/root/backup' directory, if they do not already exist\n"
 }
 
 # Modify for Portuguese language in dconf (for actual user)
-set_for_current_user() {
+set_for_current_user_BR_EN() {
   # Generate dconf.ini file
   printf "Generate dconf.ini file\n"
   sudo -u "$username" mkdir -p /home/"$username"/backup
