@@ -49,20 +49,65 @@ input_sources="/etc/dconf/db/local.d/01-input-sources"
 # Get username
 username=$(logname)
 
+function display_help() {
+  echo -e "${bold}${cyan}Usage:${reset}"
+  echo -e "  ./set_pt_BR_gnome.sh [PARAMETER]"
+  echo -e "\n${bold}${cyan}Description:${reset}"
+  echo -e "  This script add modify for Portuguese language, from English to Portuguese, in dconf for all new users and/or actual user"
+  echo -e "  Also, set as keyboard 'br' and install some localized packages xbps"
+  echo -e "  If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly"
+  echo -e "  If a the user not provide an ARGUMENT apear a menu with some options."
+  echo -e "\n${bold}${cyan}Options${reset}:"
+  echo -e "     ${magenta}With PARAMETER\tModify for Portuguese language, for all new user or actual user.${reset}"
+  echo -e "  ${yeallow}Without PARAMETER\tIs open a options menu with next options:${reset}"
+  echo -e "  ${blue}Option 1 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "             ${blue}all new users, add 'br' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 2 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "             ${blue}current user, add 'br' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 3 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "             ${blue}all new users and current user, add 'br' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 4 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "             ${blue}all new users, set 'us' default keyboard and 'br' secondary keybord.${reset}"
+  echo -e "  ${blue}Option 5 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "             ${blue}current user, set 'us' default keyboard and 'br' secondary keybord.${reset}"
+  echo -e "  ${blue}Option 6 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "             ${blue}all new users and current user, set 'us' default keyboard and 'br' secondary keybord.${reset}"
+  echo -e "  ${red}Option 7 - Exit from script.${reset}"
+  echo -e "\n${bold}${cyan}Examples:${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 1${reset}\t\t${blue}# Option 1${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 2\t${reset}\t${blue}# Option 2${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 1 2${reset}\t\t${blue}# Option 3${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 2 1${reset}\t\t${blue}# Option 3${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 3${reset}\t\t${blue}# Option 4${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 4\t${reset}\t${blue}# Option 5${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 3 4${reset}\t\t${blue}# Option 6${reset}"
+  echo -e "  ${magenta}./set_pt_BR_gnome.sh 4 3${reset}\t\t${blue}# Option 6${reset}"
+  echo -e "  ${yeallow}./set_pt_BR_gnome.sh$\t\t\t# Use the menu to choose an option${reset}"
+  echo -e "  ./set_pt_BR_gnome.sh --help or -h \t# This help."
+  exit 0
+}
+
+# Check for help flag
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  display_help
+fi
+
 # Modify for Portuguese language in central/system dconf (for all new user)
-set_for_all_users() {
+set_for_all_users_BR_EN() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
-  printf "Make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
-  if not already exist\n"
-  mkdir -p /root/backup
-  if [ ! -f /root/backup/27-app-folders ]; then
+  printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
+in the '/root/backup' directory, if they do not already exist\n"
+  if [ ! -d /root/backup ]; then # check if directrory not exist, if not make directory backup on /root
+    mkdir -p /root/backup
+  fi
+  if [ ! -f /root/backup/27-app-folders ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
     cp "$app_folders" /root/backup
   fi
-  if [ ! -f /root/backup/12-extensions-arcmenu ]; then
+  if [ ! -f /root/backup/12-extensions-arcmenu ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
     cp "$extensions_arcmenu" /root/backup
   fi
-  if [ ! -f /root/backup/01-input-sources ]; then
+  if [ ! -f /root/backup/01-input-sources ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
     cp "$input_sources" /root/backup
   fi
 
