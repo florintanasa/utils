@@ -165,43 +165,197 @@ export DBUS_SESSION_BUS_ADDRESS=\$addr;
 dconf load / < \"$dconf_file\""
 }
 
+# Modify for English language for all new user
+set_for_all_users_EN_BR() {
+  # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
+  # if not already exist
+  printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
+in the '/root/backup' directory, if they do not already exist\n"
+  if [ ! -d /root/backup ]; then # check if directrory not exist, if not make directory backup on /root
+    mkdir -p /root/backup
+  fi
+  if [ ! -f /root/backup/27-app-folders ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
+    cp "$app_folders" /root/backup
+  fi
+  if [ ! -f /root/backup/12-extensions-arcmenu ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
+    cp "$extensions_arcmenu" /root/backup
+  fi
+  if [ ! -f /root/backup/01-input-sources ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
+    cp "$input_sources" /root/backup
+  fi
+
+  # Modify for English language in dconf for all new users
+  sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$app_folders"
+  sed -i "s/name='Escritório'/name='Office'/g" "$app_folders"
+  sed -i "s/name='Gráficos'/name='Graphics'/g" "$app_folders"
+  sed -i "s/name='Programação'/name='Programming'/g" "$app_folders"
+  sed -i "s/name='Acessórios'/name='Accessories'/g" "$app_folders"
+  sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$extensions_arcmenu"
+  sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$input_sources"
+
+  # Update dconf database
+  printf "Update dconf database\n"
+  dconf update
+}
+
+# Modify for Portuguese language in dconf (for actual user)
+set_for_current_user_EN_BR() {
+  # Generate dconf.ini file
+  printf "Generate dconf.ini file\n"
+  sudo -u "$username" mkdir -p /home/"$username"/backup
+  dconf_file="/home/$username/backup/dconf.ini"
+  sudo -u "$username" dconf dump / >"$dconf_file"
+
+  # Make backup for dconf.ini
+  printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
+  sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+
+  # Now modify in dconf.ini file groups programming name for English language
+  printf "Now modify the group names for app in dconf.ini file for English language\n"
+  sudo -u "$username" sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
+  sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
+
+  # Load modified configs from dconf.ini file
+  printf "Load modified configs from dconf.ini file\n\n"
+  sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+export DBUS_SESSION_BUS_ADDRESS=\$addr;
+dconf load / < \"$dconf_file\""
+}
+
 set_localize_packages() {
   # Add other packages for Portuguese language
-  printf "Add other packages for Portuguese (Brazil) language\n\n"
+  printf "Install other packages for Portuguese (Brazil) language\n\n"
   xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
 }
 
-# Final messages
-printf "${bold}${cyan}Finish and thanks for usage${reset}\n\n\n"
-printf "If is not ok, the old configs can be loaded using 'dconf load / < "$HOME"/backup/dconf.bak'\n"
-printf "Also you have a backup files for 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the '/root' directory,\n"
-printf "this can be put back in '/etc/dconf/db/local.d/' directory and then run 'sudo dconf update', but only if the patch
-is not applied correctly in your case\n"
+# Final messages 1
+final_message_1() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, you have a backup files for '27-app-folders', '12-extensions-arcmenu' , and '01-input-sources' in the '/root/backup' directory.
+These files can be put back in then '/etc/dconf/db/local.d/' directory, and then run 'sudo dconf update', but only if the patch is not applied correctly in your case.
+It is a good idea to archive these files or/and to put it in another safe place.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$reset"
+}
+
+# Final messages 2
+final_message_2() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, the old configs can be loaded using 'dconf load / < /home/%s/backup/dconf.bak', but only if the patch is not applied correctly in your case.
+It is a good idea to archive 'dconf.bak' or to put it in another safe place, because if you run once again this script, the file is overwritten.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$username" "$reset"
+}
+
+# Final messages 3
+final_message_3() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, the old configs can be loaded using 'dconf load / < /home/%s/backup/dconf.bak'.
+Also, you have a backup files for '27-app-folders', '12-extensions-arcmenu' , and '01-input-sources' in the '/root/backup' directory.
+These files can be put back in then '/etc/dconf/db/local.d/' directory, and then run 'sudo dconf update', but only if the patch is not applied correctly in your case.
+It is a good idea to archive 'dconf.bak' or to put it in another safe place, because if you run once again this script, the file is overwritten.
+Also, is a good idea to archive the files from '/root/backup' or/and to put it in another safe place.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$username" "$reset"
+}
+
+# Final messages 4
+final_message_4() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, you have a backup files for '27-app-folders', '12-extensions-arcmenu' , and '01-input-sources' in the '/root/backup' directory.
+These files can be put back in then '/etc/dconf/db/local.d/' directory, and then run 'sudo dconf update', but only if the patch is not applied correctly in your case.
+It is a good idea to archive these files or/and to put it in another safe place.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$reset"
+}
+
+# Final messages 5
+final_message_5() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, the old configs can be loaded using 'dconf load / < /home/%s/backup/dconf.bak', but only if the patch is not applied correctly in your case.
+It is a good idea to archive 'dconf.bak' or to put it in another safe place, because if you run once again this script, the file is overwritten.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$username" "$reset"
+}
+
+# Final messages 6
+final_message_6() {
+  printf "\n\n%s%sFinish and thanks for usage%s\n\n
+%sRead carefully:%s
+%sIf is not OK, the old configs can be loaded using 'dconf load / < /home/%s/backup/dconf.bak'.
+Also, you have a backup files for '27-app-folders', '12-extensions-arcmenu' , and '01-input-sources' in the '/root/backup' directory.
+These files can be put back in then '/etc/dconf/db/local.d/' directory, and then run 'sudo dconf update', but only if the patch is not applied correctly in your case.
+It is a good idea to archive 'dconf.bak' or to put it in another safe place, because if you run once again this script, the file is overwritten.
+Also, is a good idea to archive the files from '/root/backup' or/and to put it in another safe place.%s\n" \
+    "$bold" "$cyan" "$reset" "$red" "$reset" "$green" "$username" "$reset"
+}
 
 # Check if was sent a parameter
 if [ $# -eq 0 ]; then
-  echo "Please select an option from menu:"
+  echo "${blue}Please select an option from menu:${reset}"
 
-  select opt in "Modify for Portuguese language in system dconf (for all new user)" \
-  "Modify for Portuguese language in dconf (for actual user)" \
-  "Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)" "Exit"; do
+  select opt in "EN->BR for the all new users" "EN->BR for the current user" "EN->BR for all new users and the current user" \
+    "BR->EN for the all new users" "BR->EN for the current user" "BR->EN for all new users and the current user" \
+    "Exit"; do
     case $opt in
-    "Modify for Portuguese language in system dconf (for all new user)")
-      echo "You choose Modify for Portuguese language in central/system dconf (for all new user)."
-      set_for_all_users
+    "EN->BR for the all new users")
+      echo "${blue}You choose - Modify for Portuguese language in dconf for all new users.${reset}"
+      set_for_all_users_BR_EN
       set_localize_packages
+      final_message_1
       break
       ;;
-    "Modify for Portuguese language in dconf (for actual user)")
-      echo "You choose Modify for Portuguese language in dconf (for actual user)."
-      set_for_current_user
+    "EN->BR for the current user")
+      echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
+      set_for_current_user_BR_EN
       set_localize_packages
+      final_message_2
       break
       ;;
-    "Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)")
-      echo "You choose Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)."
-      set_for_current_user
+    "EN->BR for all new users and the current user")
+      echo "${blue}You choose - Modify for Portuguese language in dconf for all new users and the current user.${reset}"
+      set_for_all_users_BR_EN
+      set_for_current_user_BR_EN
       set_localize_packages
+      final_message_3
+      break
+      ;;
+    "BR->EN for the all new users")
+      echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
+      set_for_all_users_EN_BR
+      # localized packages remain because can exist another user what need these
+      final_message_4
+      break
+      ;;
+    "BR->EN for the current user")
+      echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
+      set_for_current_user_EN_BR
+      # localized packages remain because can exist another user what need these
+      final_message_5
+      break
+      ;;
+    "BR->EN for all new users and the current user")
+      echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
+      set_for_all_users_EN_BR
+      set_for_current_user_EN_BR
+      # localized packages remain because can exist another user what need these
+      final_message_6
       break
       ;;
     "Exit")
