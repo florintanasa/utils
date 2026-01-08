@@ -363,27 +363,46 @@ if [ $# -eq 0 ]; then
       break
       ;;
     *)
-      echo "Invalid option, please try once again."
+      echo "${red}Invalid option, please try once again.${reset}"
       ;;
     esac
   done
 else
-  # Dacă un parametru a fost furnizat, il executăm direct
-  if [[ "$1" == "1" && "$2" == "2" ]]; then
-    echo "You choose Modify for Portuguese language in dconf (for actual user) and in system system dconf (for all new user)."
-    set_for_all_users
-    set_for_current_user
+  # If a parameter was send is executed directly
+  if [[ "$1" == "1" && "$2" == "2" ]] || [[ "$1" == "2" && "$2" == "1" ]]; then
+    echo "${blue}You choose - Modify for Portuguese language in dconf for all new users and the current user.${reset}"
+    set_for_all_users_BR_EN
+    set_for_current_user_BR_EN
     set_localize_packages
   elif [ "$1" == "1" ]; then
-    echo "You choose Modify for Portuguese language in central/system dconf (for all new user)."
-    set_for_all_users
+    echo "${blue}You choose - Modify for Portuguese language in dconf for all new users.${reset}"
+    set_for_all_users_BR_EN
     set_localize_packages
   elif [ "$1" == "2" ]; then
-    echo "You choose Modify for Portuguese language in dconf (for actual user)."
-    set_for_current_user
+    echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
+    set_for_current_user_BR_EN
     set_localize_packages
+  elif [[ "$1" == "3" && "$2" == "4" ]] || [[ "$1" == "4" && "$2" == "3" ]]; then
+    echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
+    set_for_all_users_EN_BR
+    set_for_current_user_EN_BR
+    # localized packages remain because can exist other users what need these
+  elif [ "$1" == "3" ]; then
+    echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
+    set_for_all_users_EN_BR
+    # localized packages remain because can exist other users what need these
+  elif [ "$1" == "4" ]; then
+    echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
+    set_for_current_user_EN_BR
+    # localized packages remain because can exist other users what need these
   else
-    echo "Parametru invalid. Te rog să utilizezi ca parametri numerele '1' pentru Modify for Portuguese language in
-    central/system dconf (for all new user) sau '2' pentru Modify for Portuguese language in dconf (for actual user)."
+    echo -e "${red}Invalid parameter. Please use for parameters numbers:\n
+    '1' to Modify for Portuguese language in system dconf, for all new users;
+    '2' to Modify for Portuguese language in dconf, for the current user;
+    '1' '2' or '2' '1' to Modify for Portuguese language in system dconf, for all new users and for current user;\n
+    '3' to Modify for English language in system dconf, for all new users;
+    '4' to Modify for English language in dconf, for the current user;
+    '3' '4' or '2' '1' to Modify for English language in system dconf, for all new users and for current user;\n
+    Run './set_pt_BR_gnome.sh --help or -h for more help.'${reset}"
   fi
 fi
