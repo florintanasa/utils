@@ -139,10 +139,11 @@ set_for_current_user_BR_EN() {
   sudo -u "$username" dconf dump / >"$dconf_file"
 
   # Make backup for dconf.ini
-  printf "Make backup for dconf.ini into dconf.bak file\n"
+  printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
   sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+
   # Now modify in dconf.ini file groups programming name for Portuguese language
-  printf "Now modify in dconf.ini file groups programming name for Portuguese language\n"
+  printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
   sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
   sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
   sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
