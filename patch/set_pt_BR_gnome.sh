@@ -25,8 +25,10 @@
 #
 # License GPLv3
 #-
-# check if is run with root rights
-if [ "$(id -u)" != "0" ]; then
+# Check for flag and if flag is not '2' or '4' check if the script is run by root
+if [[ "$1" == "2" || "$1" == "4" || "$1" == "--help" || "$1" == "-h" ]]; then
+  echo "Run the script for current user, only for parameters '2', '4' or '--help'"
+elif [[ "$(id -u)" != "0" ]]; then
   echo "this script must run as root" 1>&2
   exit 1
 fi
