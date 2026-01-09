@@ -78,13 +78,15 @@ function display_help() {
   echo -e "\n${bold}${cyan}Examples:${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1${reset}\t\t${blue}# Option 1${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2\t${reset}\t${blue}# Option 2${reset}"
+  echo -e "  ${magenta}set_pt_BR_gnome.sh 2\t\t${reset}\t${blue}# Option 2, can be run by current user, but without to install the packages${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1 2${reset}\t\t${blue}# Option 3${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2 1${reset}\t\t${blue}# Option 3${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3${reset}\t\t${blue}# Option 4${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4\t${reset}\t${blue}# Option 5${reset}"
+  echo -e "  ${magenta}set_pt_BR_gnome.sh 4\t\t${reset}\t${blue}# Option 5, can be run by current user${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3 4${reset}\t\t${blue}# Option 6${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4 3${reset}\t\t${blue}# Option 6${reset}"
-  echo -e "  ${yeallow}sudo set_pt_BR_gnome.sh$\t\t\t# Use the menu to choose an option${reset}"
+  echo -e "  ${yeallow}sudo set_pt_BR_gnome.sh$\t\t# Use the menu to choose an option${reset}"
   echo -e "  set_pt_BR_gnome.sh --help or -h \t# This help."
   exit 0
 }
@@ -398,11 +400,7 @@ if [ $# -eq 0 ]; then
     "EN->BR for the current user")
       echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
       set_for_current_user_BR_EN
-      if [ "$(id -u)" == "0" ]; then # check if is run by root
-        set_localize_packages
-      else
-        echo "${red}You run without 'root' rights, so you can't install the packages${reset}"
-      fi
+      set_localize_packages
       final_message_2
       break
       ;;
