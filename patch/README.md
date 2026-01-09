@@ -43,7 +43,8 @@ Language, from English image ISO, like @LinuXpert in next video review.
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_gnome.sh
 chmod +x set_pt_gnome.sh
-sudo ./set_pt_gnome.sh
+sudo cp set_pt_gnome.sh /usr/local/bin/ # to be used by all users
+set_pt_gnome.sh --help # for more info 
 ```  
   
 ### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
