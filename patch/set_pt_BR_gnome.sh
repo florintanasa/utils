@@ -134,37 +134,73 @@ in the '/root/backup' directory, if they do not already exist\n"
 
 # Modify for Portuguese language in dconf (for actual user)
 set_for_current_user_BR_EN() {
-  # Generate dconf.ini file
-  printf "Generate dconf.ini file\n"
-  sudo -u "$username" mkdir -p /home/"$username"/backup
-  dconf_file="/home/$username/backup/dconf.ini"
-  sudo -u "$username" dconf dump / >"$dconf_file"
+  if [ "$(id -u)" == "0" ]; then # check if is run by root
+    # Generate dconf.ini file
+    printf "Generate dconf.ini file\n"
+    if [ ! -d /home/"$username"/backup ]; then # Check if directory not exist, if not exist make the directory backup
+      sudo -u "$username" mkdir -p /home/"$username"/backup
+    fi
+    dconf_file="/home/$username/backup/dconf.ini"
+    sudo -u "$username" dconf dump / >"$dconf_file"
 
-  # Make backup for dconf.ini
-  printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
-  sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+    # Make backup for dconf.ini
+    printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
+    sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-  # Now modify in dconf.ini file groups programming name for Portuguese language
-  printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
-  sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    # Now modify in dconf.ini file groups programming name for Portuguese language
+    printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
+    sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
 
-  # Load modified configs from dconf.ini file
-  printf "Load modified configs from dconf.ini file\n\n"
-  sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
-addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
-export DBUS_SESSION_BUS_ADDRESS=\$addr;
-dconf load / < \"$dconf_file\""
+    # Load modified configs from dconf.ini file
+    printf "Load modified configs from dconf.ini file\n\n"
+    sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+    addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+    export DBUS_SESSION_BUS_ADDRESS=\$addr;
+    dconf load / < \"$dconf_file\""
+
+  elif [ "$(id -u)" != "0" ]; then # check if is run by non admin user
+    # Generate dconf.ini file
+    printf "Generate dconf.ini file\n"
+    if [ ! -d /home/"$username"/backup ]; then # Check if directory not exist, if not exist make the directory backup
+      mkdir -p /home/"$username"/backup
+    fi
+    dconf_file="/home/$username/backup/dconf.ini"
+    dconf dump / >"$dconf_file"
+
+    # Make backup for dconf.ini
+    printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
+    cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+
+    # Now modify in dconf.ini file groups programming name for Portuguese language
+    printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
+    sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
+    sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
+    sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
+    sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
+    sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
+    sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
+    sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
+    sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
+    sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
+    sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
+    sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+
+    # Load modified configs from dconf.ini file
+    printf "Load modified configs from dconf.ini file\n\n"
+    dconf load / <"$dconf_file"
+  fi
 }
 
 # Modify for English language for all new user
@@ -205,39 +241,75 @@ in the '/root/backup' directory, if they do not already exist\n"
   dconf update
 }
 
-# Modify for Portuguese language in dconf (for actual user)
+# Modify for English language in dconf (for actual user)
 set_for_current_user_EN_BR() {
-  # Generate dconf.ini file
-  printf "Generate dconf.ini file\n"
-  sudo -u "$username" mkdir -p /home/"$username"/backup
-  dconf_file="/home/$username/backup/dconf.ini"
-  sudo -u "$username" dconf dump / >"$dconf_file"
+  if [ "$(id -u)" == "0" ]; then # check if is run by root
+    # Generate dconf.ini file
+    printf "Generate dconf.ini file\n"
+    if [ ! -d /home/"$username"/backup ]; then # Check if directory not exist, if not exist make the directory backup
+      sudo -u "$username" mkdir -p /home/"$username"/backup
+    fi
+    dconf_file="/home/$username/backup/dconf.ini"
+    sudo -u "$username" dconf dump / >"$dconf_file"
 
-  # Make backup for dconf.ini
-  printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
-  sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+    # Make backup for dconf.ini
+    printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
+    sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-  # Now modify in dconf.ini file groups programming name for English language
-  printf "Now modify the group names for app in dconf.ini file for English language\n"
-  sudo -u "$username" sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
-  sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
+    # Now modify in dconf.ini file groups programming name for English language
+    printf "Now modify the group names for app in dconf.ini file for English language\n"
+    sudo -u "$username" sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
 
-  # Load modified configs from dconf.ini file
-  printf "Load modified configs from dconf.ini file\n\n"
-  sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
-addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
-export DBUS_SESSION_BUS_ADDRESS=\$addr;
-dconf load / < \"$dconf_file\""
+    # Load modified configs from dconf.ini file
+    printf "Load modified configs from dconf.ini file\n\n"
+    sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+    addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+    export DBUS_SESSION_BUS_ADDRESS=\$addr;
+    dconf load / < \"$dconf_file\""
+
+  elif [ "$(id -u)" != "0" ]; then # check if is run by non admin user
+    # Generate dconf.ini file
+    printf "Generate dconf.ini file\n"
+    if [ ! -d /home/"$username"/backup ]; then # Check if directory not exist, if not exist make the directory backup
+      mkdir -p /home/"$username"/backup
+    fi
+    dconf_file="/home/$username/backup/dconf.ini"
+    dconf dump / >"$dconf_file"
+
+    # Make backup for dconf.ini
+    printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
+    sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
+
+    # Now modify in dconf.ini file groups programming name for English language
+    printf "Now modify the group names for app in dconf.ini file for English language\n"
+    sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
+    sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
+    sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
+    sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
+    sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
+    sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
+    sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
+    sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
+    sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
+    sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
+    sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
+
+    # Load modified configs from dconf.ini file
+    printf "Load modified configs from dconf.ini file\n\n"
+    dconf load / <"$dconf_file"
+  fi
 }
 
 set_localize_packages() {
