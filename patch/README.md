@@ -41,9 +41,10 @@ Language, from English image ISO, like @LinuXpert in next video review.
 **Usage** 
   
 ```bash
-wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_gnome.sh
-chmod +x set_pt_gnome.sh
-sudo ./set_pt_gnome.sh
+wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_BR_gnome.sh
+chmod +x set_pt_BR_gnome.sh
+sudo cp set_pt_BR_gnome.sh /usr/local/bin/ # to be used by all users
+set_pt_BR_gnome.sh --help # for more info 
 ```  
   
 ### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
@@ -58,6 +59,51 @@ To have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) wit
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_distro.sh
 chmod +x set_distro.sh
-sudo ./set_distro.sh
+set_distro.sh --help
 ```
+The last command display next info help messages:  
+```text
+Run the script for current user, only for parameters '2', '4' or '--help'
+Usage:
+./set_pt_BR_gnome.sh [PARAMETER]
 
+Description:
+This script add modify for Portuguese language, from English to Portuguese, in dconf for all new users and/or actual user
+Also, set as keyboard 'br' and install some localized packages xbps.
+If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly
+If a the user not provide an ARGUMENT appear a menu with some options.
+
+Options:
+With PARAMETER     Modify for Portuguese language, for all new user or actual user.
+Without PARAMETER     Is open a options menu with next options:
+Option 1 - Modify for Portuguese language, from English to Portuguese, in dconf for
+all new users, add 'br' keyboard and add additional packages for localized language.
+Option 2 - Modify for Portuguese language, from English to Portuguese, in dconf for
+current user, add 'br' keyboard and add additional packages for localized language.
+Option 3 - Modify for Portuguese language, from English to Portuguese, in dconf for
+all new users and current user, add 'br' keyboard and add additional packages for localized language.
+Option 4 - Modify for English language, from Portuguese to English, in dconf for
+all new users, set 'us' default keyboard and 'br' secondary keyboard.
+Option 5 - Modify for English language, from Portuguese to English, in dconf for
+current user, set 'us' default keyboard and 'br' secondary keyboard.
+Option 6 - Modify for English language, from Portuguese to English, in dconf for
+all new users and current user, set 'us' default keyboard and 'br' secondary keyboard.
+Option 7 - Exit from script.
+
+Examples:
+sudo set_pt_BR_gnome.sh 1             # Option 1
+sudo set_pt_BR_gnome.sh 2             # Option 2
+set_pt_BR_gnome.sh 2                  # Option 2, can be run by current user, but without to install the packages
+sudo set_pt_BR_gnome.sh 1 2           # Option 3
+sudo set_pt_BR_gnome.sh 2 1           # Option 3
+sudo set_pt_BR_gnome.sh 3             # Option 4
+sudo set_pt_BR_gnome.sh 4             # Option 5
+set_pt_BR_gnome.sh 4                  # Option 5, can be run by current user
+sudo set_pt_BR_gnome.sh 3 4           # Option 6
+sudo set_pt_BR_gnome.sh 4 3           # Option 6
+sudo set_pt_BR_gnome.sh$              # Use the menu to choose an option
+set_pt_BR_gnome.sh --help or -h       # This help.
+```
+In next video, you found, how to use the patch and another example how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on pt_BR localized language. 
+  
+[<img src="https://img.youtube.com/vi/AD9lnR4zPTw/maxresdefault.jpg" width="960" height="510"/>](https://www.youtube.com/embed/AD9lnR4zPTw?autoplay=1&mute=1)
