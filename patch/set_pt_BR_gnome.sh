@@ -99,8 +99,8 @@ set_for_all_users_BR_EN() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
-in the '/root/backup' directory, if they do not already exist\n"
-  if [ ! -d /root/backup ]; then # check if directrory not exist, if not make directory backup on /root
+in the '/root/backup' directory, if they do not already exist.\n"
+  if [ ! -d /root/backup ]; then # check if directory not exist, if not make directory backup on /root
     mkdir -p /root/backup
   fi
   if [ ! -f /root/backup/27-app-folders ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
@@ -208,8 +208,8 @@ set_for_all_users_EN_BR() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
-in the '/root/backup' directory, if they do not already exist\n"
-  if [ ! -d /root/backup ]; then # check if directrory not exist, if not make directory backup on /root
+in the '/root/backup' directory, if they do not already exist.\n"
+  if [ ! -d /root/backup ]; then # check if directory not exist, if not exist make directory the backup on /root
     mkdir -p /root/backup
   fi
   if [ ! -f /root/backup/27-app-folders ]; then # check if the file not exist, if exist do nothing, else copy from system in /root/backup
