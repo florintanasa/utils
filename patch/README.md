@@ -46,22 +46,8 @@ chmod +x set_pt_BR_gnome.sh
 sudo mv set_pt_BR_gnome.sh /usr/local/bin/ # to be used by all users
 set_pt_BR_gnome.sh --help # for more info 
 ```  
-  
-### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
-This script add modification at os-release and lsb_release file for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void).
-  
-**Require**  
-  
-To have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) with `base-files` version >= 0.146_1
 
-**Usage**
-  
-```bash
-wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_distro.sh
-chmod +x set_distro.sh
-set_distro.sh --help
-```
-The last command display next info help messages:  
+The last command display next info help messages:
 ```text
 Run the script for current user, only for parameters '2', '4' or '--help'
 Usage:
@@ -104,7 +90,22 @@ sudo set_pt_BR_gnome.sh 4 3           # Option 6
 sudo set_pt_BR_gnome.sh$              # Use the menu to choose an option
 set_pt_BR_gnome.sh --help or -h       # This help.
 ```
-In the following video, you found how to use the patch and another example of how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on the 
-localized language pt_BR.  
-  
+In the following video, you found how to use the patch and another example of how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on the
+localized language pt_BR.
+
 [<img src="https://img.youtube.com/vi/AD9lnR4zPTw/maxresdefault.jpg" width="960" height="510"/>](https://www.youtube.com/embed/AD9lnR4zPTw?autoplay=1&mute=1)
+
+### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
+This script add modification at os-release and lsb_release file for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void).
+  
+**Require**  
+  
+To have installed [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) with `base-files` version >= 0.146_1
+
+**Usage**
+  
+```bash
+wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_distro.sh
+chmod +x set_distro.sh
+set_distro.sh --help
+```
