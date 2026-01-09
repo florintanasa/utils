@@ -43,7 +43,7 @@ Language, from English image ISO, like @LinuXpert in next video review.
 ```bash
 wget https://github.com/florintanasa/utils/raw/refs/heads/main/patch/set_pt_BR_gnome.sh
 chmod +x set_pt_BR_gnome.sh
-sudo cp set_pt_BR_gnome.sh /usr/local/bin/ # to be used by all users
+sudo mv set_pt_BR_gnome.sh /usr/local/bin/ # to be used by all users
 set_pt_BR_gnome.sh --help # for more info 
 ```  
   
