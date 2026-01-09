@@ -398,7 +398,11 @@ if [ $# -eq 0 ]; then
     "EN->BR for the current user")
       echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
       set_for_current_user_BR_EN
-      set_localize_packages
+      if [ "$(id -u)" == "0" ]; then # check if is run by root
+        set_localize_packages
+      else
+        echo "${red}You run without 'root' rights, so you can't install the packages${reset}"
+      fi
       final_message_2
       break
       ;;
@@ -455,7 +459,11 @@ else
   elif [ "$1" == "2" ]; then
     echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
     set_for_current_user_BR_EN
-    set_localize_packages
+    if [ "$(id -u)" == "0" ]; then # check if is run by root
+      set_localize_packages
+    else
+      echo "${red}You run without 'root' rights, so you can't install the packages${reset}"
+    fi
   elif [[ "$1" == "3" && "$2" == "4" ]] || [[ "$1" == "4" && "$2" == "3" ]]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
     set_for_all_users_EN_BR
