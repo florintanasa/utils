@@ -104,6 +104,7 @@ sudo set_pt_BR_gnome.sh 4 3           # Option 6
 sudo set_pt_BR_gnome.sh$              # Use the menu to choose an option
 set_pt_BR_gnome.sh --help or -h       # This help.
 ```
-In next video, you found, how to use the patch and another example how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on pt_BR localized language. 
+In the following video, you found how to use the patch and another example of how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on the 
+localized language pt_BR.  
   
 [<img src="https://img.youtube.com/vi/AD9lnR4zPTw/maxresdefault.jpg" width="960" height="510"/>](https://www.youtube.com/embed/AD9lnR4zPTw?autoplay=1&mute=1)
