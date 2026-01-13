@@ -129,7 +129,8 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/sources=\[('xkb', 'us')\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -165,6 +166,7 @@ set_for_current_user_EN_RO() {
     sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -199,7 +201,8 @@ set_for_current_user_EN_RO() {
     sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$dconf_file"
     sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
     sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -238,7 +241,8 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Grafică'/'name': 'Graphics'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g"  "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'ro')]/g"  "$input_sources"
+  sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -273,8 +277,8 @@ set_for_current_user_RO_EN() {
     sudo -u "$username" sed -i "s/'name': 'Grafică'/'name': 'Graphics'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'ro')]/g" "$dconf_file"
-    
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
     sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
@@ -309,6 +313,7 @@ set_for_current_user_RO_EN() {
     sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$dconf_file"
     sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g" "$dconf_file"
     sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'ro')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -327,7 +332,7 @@ set_system_language_EN_RO() {
   printf "Set system language for Romanian language\n\n"
   sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
   sed -i "s/LANG=en_US.UTF-8/LANG=ro_RO.UTF-8/g" /etc/locale.conf
-  xbps-reconfigure --force --all
+  xbps-reconfigure --force glibc-locales
 }
 
 # Modify to English language the system
@@ -336,14 +341,14 @@ set_system_language_RO_EN() {
   # I not change back to '#ro_RO.UTF-8 UTF-8' in '/etc/default/libc-locales',
   # because can exist in system over users what use Romanian language
   sed -i "s/LANG=ro_RO.UTF-8/LANG=en_US.UTF-8/g" /etc/locale.conf
-  xbps-reconfigure --force --all
+  xbps-reconfigure --force glibc-locales
 }
 
 # Add Romanian language in the system
 add_system_language_RO() {
   printf "Add Romanian language in the system (glibc)\n\n"
   sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
-  xbps-reconfigure --force --all
+  xbps-reconfigure --force glibc-locales
 }
 
 # Final messages 1
