@@ -320,6 +320,30 @@ set_localize_packages() {
   xbps-install -Sy firefox-i18n-ro libreoffice-i18n-ro mythes-ro hyphen-ro manpages-ro hunspell-ro_RO
 }
 
+# Modify to Romanian language the system
+set_system_language_EN_RO() {
+  printf "Set system language for Romanian language\n\n"
+  sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
+  sed -i "s/LANG=en_US.UTF-8/LANG=ro_RO.UTF-8/g" /etc/locale.conf
+  xbps-reconfigure --force --all
+}
+
+# Modify to English language the system
+set_system_language_RO_EN() {
+  printf "Set system language for English language\n\n"
+  # I not change back to '#ro_RO.UTF-8 UTF-8' in '/etc/default/libc-locales',
+  # because can exist in system over users what use Romanian language
+  sed -i "s/LANG=ro_RO.UTF-8/LANG=en_US.UTF-8/g" /etc/locale.conf
+  xbps-reconfigure --force --all
+}
+
+# Add Romanian language in the system
+add_system_language_RO() {
+  printf "Add Romanian language in the system (glibc)\n\n"
+  sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
+  xbps-reconfigure --force --all
+}
+
 # Final messages 1
 final_message_1() {
   printf "\n\n%s%sFinish and thanks for usage%s\n\n
