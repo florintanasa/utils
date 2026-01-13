@@ -162,7 +162,7 @@ set_for_current_user_EN_RO() {
     sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -197,7 +197,7 @@ set_for_current_user_EN_RO() {
     sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$dconf_file"
     sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
     sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
