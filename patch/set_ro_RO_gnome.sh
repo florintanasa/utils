@@ -97,7 +97,7 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 fi
 
 # Modify for Romanian language in central/system dconf (for all new user)
-set_for_all_users_BR_EN() {
+set_for_all_users_EN_RO() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -135,7 +135,7 @@ in the '/root/backup' directory, if they do not already exist.\n"
 }
 
 # Modify for Romanian language in dconf (for actual user)
-set_for_current_user_BR_EN() {
+set_for_current_user_EN_RO() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -206,7 +206,7 @@ set_for_current_user_BR_EN() {
 }
 
 # Modify for English language for all new user
-set_for_all_users_EN_BR() {
+set_for_all_users_RO_EN() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -244,7 +244,7 @@ in the '/root/backup' directory, if they do not already exist.\n"
 }
 
 # Modify for English language in dconf (for actual user)
-set_for_current_user_EN_BR() {
+set_for_current_user_RO_EN() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
