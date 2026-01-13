@@ -412,51 +412,62 @@ Also, is a good idea to archive the files from '/root/backup' or/and to put it i
 if [ $# -eq 0 ]; then
   echo "${blue}Please select an option from menu:${reset}"
 
-  select opt in "EN->RO for the all new users" "EN->RO for the current user" "EN->RO for all new users and the current user" \
-  "RO->EN for the all new users" "RO->EN for the current user" "RO->EN for all new users and the current user" \
-  "Exit"; do
+  select opt in "EN->RO for the all new users" "EN->RO for the current user" \
+    "EN->RO for all new users and the current user" "Add RO in libc-locales and install additional packages" \
+    "RO->EN for the all new users" "RO->EN for the current user" "RO->EN for all new users and the current user" \
+    "Exit"; do
     case $opt in
     "EN->RO for the all new users")
       echo "${blue}You choose - Modify for Romanian language in dconf for all new users.${reset}"
-      set_for_all_users_BR_EN
+      set_for_all_users_EN_RO
       set_localize_packages
+      set_system_language_EN_RO
       final_message_1
       break
       ;;
     "EN->RO for the current user")
       echo "${blue}You choose - Modify for Romanian language in dconf for the current user.${reset}"
-      set_for_current_user_BR_EN
+      set_for_current_user_EN_RO
       set_localize_packages
       final_message_2
       break
       ;;
     "EN->RO for all new users and the current user")
       echo "${blue}You choose - Modify for Romanian language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_BR_EN
-      set_for_current_user_BR_EN
+      set_for_all_users_EN_RO
+      set_for_current_user_EN_RO
       set_localize_packages
+      set_system_language_EN_RO
       final_message_3
+      break
+      ;;
+    "Add RO in libc-locales and install additional packages")
+      echo "${blue}You choose - Enable Romanian language in libc-locales and install additional packages for localized language.${reset}"
+      add_system_language_RO
+      set_localize_packages
       break
       ;;
     "RO->EN for the all new users")
       echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-      set_for_all_users_EN_BR
+      set_for_all_users_RO_EN
       # localized packages remain because can exist another user what need these
+      set_system_language_RO_EN
       final_message_4
       break
       ;;
     "RO->EN for the current user")
       echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-      set_for_current_user_EN_BR
+      set_for_current_user_RO_EN
       # localized packages remain because can exist another user what need these
       final_message_5
       break
       ;;
     "RO->EN for all new users and the current user")
       echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_EN_BR
-      set_for_current_user_EN_BR
+      set_for_all_users_RO_EN
+      set_for_current_user_RO_EN
       # localized packages remain because can exist another user what need these
+      set_system_language_RO_EN
       final_message_6
       break
       ;;
@@ -473,16 +484,16 @@ else
   # If a parameter was send is executed directly
   if [[ "$1" == "1" && "$2" == "2" ]] || [[ "$1" == "2" && "$2" == "1" ]]; then
     echo "${blue}You choose - Modify for Romanian language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_BR_EN
-    set_for_current_user_BR_EN
+    set_for_all_users_EN_RO
+    set_for_current_user_EN_RO
     set_localize_packages
   elif [ "$1" == "1" ]; then
     echo "${blue}You choose - Modify for Romanian language in dconf for all new users.${reset}"
-    set_for_all_users_BR_EN
+    set_for_all_users_EN_RO
     set_localize_packages
   elif [ "$1" == "2" ]; then
     echo "${blue}You choose - Modify for Romanian language in dconf for the current user.${reset}"
-    set_for_current_user_BR_EN
+    set_for_current_user_EN_RO
     if [ "$(id -u)" == "0" ]; then # check if is run by root
       set_localize_packages
     else
@@ -490,17 +501,21 @@ else
     fi
   elif [[ "$1" == "3" && "$2" == "4" ]] || [[ "$1" == "4" && "$2" == "3" ]]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_EN_BR
-    set_for_current_user_EN_BR
+    set_for_all_users_RO_EN
+    set_for_current_user_RO_EN
     # localized packages remain because can exist other users what need these
   elif [ "$1" == "3" ]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-    set_for_all_users_EN_BR
+    set_for_all_users_RO_EN
     # localized packages remain because can exist other users what need these
   elif [ "$1" == "4" ]; then
     echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-    set_for_current_user_EN_BR
+    set_for_current_user_RO_EN
     # localized packages remain because can exist other users what need these
+  elif [ "$1" == "5" ]; then
+    echo "${blue}You choose - Enable Romanian language in libc-locales and install additional packages for localized language.${reset}"
+    add_system_language_RO
+    set_localize_packages
   else
     echo -e "${red}Invalid parameter. Please use for parameters numbers:\n
     '1' to Modify for Romanian language in system dconf, for all new users;
