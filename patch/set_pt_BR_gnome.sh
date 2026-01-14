@@ -254,7 +254,8 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$input_sources"
+  sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -298,6 +299,21 @@ set_for_current_user_BR_EN() {
     export DBUS_SESSION_BUS_ADDRESS=\$addr;
     dconf load / < \"$dconf_file\""
 
+    # Change the language for current user to English 
+    if [ -f /var/lib/AccountsService/users/"$username" ]; then
+      printf "Change the language, for current user, to English at next Logon\n"
+      if cat /var/lib/AccountsService/users/"$username" | grep -q "Languages=pt_BR.UTF-8;"; then # Check if allready set the language to Portuguese (Brazilian)
+        sed -i "s/Languages=pt_BR.UTF-8;/Languages=en_US.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, ghange the line and set to English language
+      else
+        sed -i "2i Languages=pt_BR.UTF-8;" /var/lib/AccountsService/users/"$username" # If not, add the line what set to English language before to the second line 
+      fi
+      # Close the session (Logout)
+      sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+      addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+      export DBUS_SESSION_BUS_ADDRESS=\$addr;
+      gnome-session-quit"
+    fi
+
   elif [ "$(id -u)" != "0" ]; then # check if is run by non admin user
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -324,7 +340,8 @@ set_for_current_user_BR_EN() {
     sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
     sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
     sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
