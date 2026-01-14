@@ -55,26 +55,27 @@ function display_help() {
   echo -e "${bold}${cyan}Usage:${reset}"
   echo -e "  ./set_pt_BR_gnome.sh [PARAMETER]"
   echo -e "\n${bold}${cyan}Description:${reset}"
-  echo -e "  This script add modify for Portuguese language, from English to Portuguese, in dconf for all new users and/or actual user"
+  echo -e "  This script add modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for all new users and/or actual user"
   echo -e "  Also, set as keyboard 'br' and install some localized packages xbps."
   echo -e "  If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly"
   echo -e "  If a the user not provide an ARGUMENT appear a menu with some options."
   echo -e "\n${bold}${cyan}Options${reset}:"
-  echo -e "     ${magenta}With PARAMETER\tModify for Portuguese language, for all new user or actual user.${reset}"
-  echo -e "  ${yeallow}Without PARAMETER\tIs open a options menu with next options:${reset}"
-  echo -e "  ${blue}Option 1 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "     ${magenta}With PARAMETER\tModify for Portuguese (Brazilian) language, for all new user or actual user.${reset}"
+  echo -e "  ${yellow}Without PARAMETER\tIs open a options menu with next options:${reset}"
+  echo -e "  ${blue}Option 1 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
   echo -e "             ${blue}all new users, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 2 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "  ${blue}Option 2 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
   echo -e "             ${blue}current user, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 3 - Modify for Portuguese language, from English to Portuguese, in dconf for${reset}"
+  echo -e "  ${blue}Option 3 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
   echo -e "             ${blue}all new users and current user, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 4 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "  ${blue}Option 4 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
   echo -e "             ${blue}all new users, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
-  echo -e "  ${blue}Option 5 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "  ${blue}Option 5 - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 6 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
   echo -e "             ${blue}current user, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
-  echo -e "  ${blue}Option 6 - Modify for English language, from Portuguese to English, in dconf for${reset}"
+  echo -e "  ${blue}Option 7 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
   echo -e "             ${blue}all new users and current user, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
-  echo -e "  ${red}Option 7 - Exit from script.${reset}"
+  echo -e "  ${red}Option 8 - Exit from script.${reset}"
   echo -e "\n${bold}${cyan}Examples:${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1${reset}\t\t${blue}# Option 1${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2\t${reset}\t${blue}# Option 2${reset}"
@@ -82,11 +83,12 @@ function display_help() {
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1 2${reset}\t\t${blue}# Option 3${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2 1${reset}\t\t${blue}# Option 3${reset}"
   echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3${reset}\t\t${blue}# Option 4${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4\t${reset}\t${blue}# Option 5${reset}"
-  echo -e "  ${magenta}set_pt_BR_gnome.sh 4\t\t${reset}\t${blue}# Option 5, can be run by current user${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3 4${reset}\t\t${blue}# Option 6${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4 3${reset}\t\t${blue}# Option 6${reset}"
-  echo -e "  ${yeallow}sudo set_pt_BR_gnome.sh$\t\t# Use the menu to choose an option${reset}"
+  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4\t${reset}\t${blue}# Option 6${reset}"
+  echo -e "  ${magenta}set_pt_BR_gnome.sh 4\t\t${reset}\t${blue}# Option 6, can be run by current user${reset}"
+  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 5\t${reset}\t${blue}# Option 5${reset}"
+  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3 4${reset}\t\t${blue}# Option 7${reset}"
+  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4 3${reset}\t\t${blue}# Option 7${reset}"
+  echo -e "  ${yellow}sudo set_pt_BR_gnome.sh$\t\t# Use the menu to choose an option${reset}"
   echo -e "  set_pt_BR_gnome.sh --help or -h \t# This help."
   exit 0
 }
@@ -449,51 +451,62 @@ Also, is a good idea to archive the files from '/root/backup' or/and to put it i
 if [ $# -eq 0 ]; then
   echo "${blue}Please select an option from menu:${reset}"
 
-  select opt in "EN->BR for the all new users" "EN->BR for the current user" "EN->BR for all new users and the current user" \
+  select opt in "EN->BR for the all new users" "EN->BR for the current user" \
+    "EN->BR for all new users and the current user" "Add RO in libc-locales and install additional packages" \
     "BR->EN for the all new users" "BR->EN for the current user" "BR->EN for all new users and the current user" \
     "Exit"; do
     case $opt in
     "EN->BR for the all new users")
-      echo "${blue}You choose - Modify for Portuguese language in dconf for all new users.${reset}"
-      set_for_all_users_BR_EN
+      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users.${reset}"
+      set_for_all_users_EN_BR
       set_localize_packages
+      set_system_language_EN_BR
       final_message_1
       break
       ;;
     "EN->BR for the current user")
-      echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
-      set_for_current_user_BR_EN
+      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for the current user.${reset}"
+      set_for_current_user_EN_BR
       set_localize_packages
       final_message_2
       break
       ;;
     "EN->BR for all new users and the current user")
-      echo "${blue}You choose - Modify for Portuguese language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_BR_EN
-      set_for_current_user_BR_EN
+      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users and the current user.${reset}"
+      set_for_all_users_EN_BR
+      set_for_current_user_EN_BR
       set_localize_packages
+      set_system_language_EN_BR
       final_message_3
+      break
+      ;;
+    "Add pt_BR in libc-locales and install additional packages")
+      echo "${blue}You choose - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
+      add_system_language_pt_BR
+      set_localize_packages
       break
       ;;
     "BR->EN for the all new users")
       echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-      set_for_all_users_EN_BR
+      set_for_all_users_BR_EN
       # localized packages remain because can exist another user what need these
+      set_system_language_BR_EN
       final_message_4
       break
       ;;
     "BR->EN for the current user")
       echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-      set_for_current_user_EN_BR
+      set_for_current_user_BR_EN
       # localized packages remain because can exist another user what need these
       final_message_5
       break
       ;;
     "BR->EN for all new users and the current user")
       echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_EN_BR
-      set_for_current_user_EN_BR
+      set_for_all_users_BR_EN
+      set_for_current_user_BR_EN
       # localized packages remain because can exist another user what need these
+      set_system_language_BR_EN
       final_message_6
       break
       ;;
@@ -509,17 +522,19 @@ if [ $# -eq 0 ]; then
 else
   # If a parameter was send is executed directly
   if [[ "$1" == "1" && "$2" == "2" ]] || [[ "$1" == "2" && "$2" == "1" ]]; then
-    echo "${blue}You choose - Modify for Portuguese language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_BR_EN
-    set_for_current_user_BR_EN
+    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users and the current user.${reset}"
+    set_for_all_users_EN_BR
+    set_for_current_user_EN_BR
     set_localize_packages
+    set_system_language_EN_BR
   elif [ "$1" == "1" ]; then
-    echo "${blue}You choose - Modify for Portuguese language in dconf for all new users.${reset}"
-    set_for_all_users_BR_EN
+    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users.${reset}"
+    set_for_all_users_EN_BR
     set_localize_packages
+    set_system_language_EN_BR
   elif [ "$1" == "2" ]; then
-    echo "${blue}You choose - Modify for Portuguese language in dconf for the current user.${reset}"
-    set_for_current_user_BR_EN
+    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for the current user.${reset}"
+    set_for_current_user_EN_BR
     if [ "$(id -u)" == "0" ]; then # check if is run by root
       set_localize_packages
     else
@@ -527,22 +542,28 @@ else
     fi
   elif [[ "$1" == "3" && "$2" == "4" ]] || [[ "$1" == "4" && "$2" == "3" ]]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_EN_BR
-    set_for_current_user_EN_BR
-    # localized packages remain because can exist other users what need these
+    set_for_all_users_BR_EN
+    set_for_current_user_BR_EN
+    # localized packages remain because can exist another user what need these
+    set_system_language_BR_EN
   elif [ "$1" == "3" ]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-    set_for_all_users_EN_BR
-    # localized packages remain because can exist other users what need these
+    set_for_all_users_BR_EN
+    # localized packages remain because can exist another user what need these
+    set_system_language_BR_EN
   elif [ "$1" == "4" ]; then
     echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-    set_for_current_user_EN_BR
+    set_for_current_user_BR_EN
     # localized packages remain because can exist other users what need these
+  elif [ "$1" == "5" ]; then
+    echo "${blue}You choose - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
+    add_system_language_pt_BR
+    set_localize_packages
   else
     echo -e "${red}Invalid parameter. Please use for parameters numbers:\n
-    '1' to Modify for Portuguese language in system dconf, for all new users;
-    '2' to Modify for Portuguese language in dconf, for the current user;
-    '1' '2' or '2' '1' to Modify for Portuguese language in system dconf, for all new users and for current user;\n
+    '1' to Modify for Portuguese (Brazilian) language in system dconf, for all new users;
+    '2' to Modify for Portuguese (Brazilian) language in dconf, for the current user;
+    '1' '2' or '2' '1' to Modify for Portuguese (Brazilian) language in system dconf, for all new users and for current user;\n
     '3' to Modify for English language in system dconf, for all new users;
     '4' to Modify for English language in dconf, for the current user;
     '3' '4' or '2' '1' to Modify for English language in system dconf, for all new users and for current user;\n
