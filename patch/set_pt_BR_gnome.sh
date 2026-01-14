@@ -127,15 +127,16 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
   dconf update
 }
 
-# Modify for Portuguese language in dconf (for actual user)
-set_for_current_user_BR_EN() {
+# Modify for Portuguese (Brazilian) language in dconf (for actual user)
+set_for_current_user_EN_BR() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -162,7 +163,8 @@ set_for_current_user_BR_EN() {
     sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -170,6 +172,21 @@ set_for_current_user_BR_EN() {
     addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
     export DBUS_SESSION_BUS_ADDRESS=\$addr;
     dconf load / < \"$dconf_file\""
+
+    # Change the language for current user to Portuguese (Brazilian) 
+    if [ -f /var/lib/AccountsService/users/"$username" ]; then
+      printf "Change the language, for current user, to Portuguese (Brazilian) at next Logon\n"
+      if cat /var/lib/AccountsService/users/"$username" | grep -q "Languages=en_US.UTF-8;"; then # Check if allready set the language to English
+        sed -i "s/Languages=en_US.UTF-8;/Languages=pt_BR.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, ghange the line and set to Portuguese (Brazilian) language
+      else
+        sed -i "2i Languages=pt_BR.UTF-8;" /var/lib/AccountsService/users/"$username" # If not, add the line what set to Portuguese (Brazilian) language before to the second line 
+      fi
+      # Close the session (Logout)
+      sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
+      addr=\$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/\$pid/environ | cut -d= -f2- | tr -d '\0');
+      export DBUS_SESSION_BUS_ADDRESS=\$addr;
+      gnome-session-quit"
+    fi
 
   elif [ "$(id -u)" != "0" ]; then # check if is run by non admin user
     # Generate dconf.ini file
@@ -197,7 +214,8 @@ set_for_current_user_BR_EN() {
     sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
     sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
     sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'us'), ('xkb', 'ro')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
