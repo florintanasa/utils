@@ -224,7 +224,7 @@ set_for_current_user_EN_BR() {
 }
 
 # Modify for English language for all new user
-set_for_all_users_EN_BR() {
+set_for_all_users_BR_EN() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -262,7 +262,7 @@ in the '/root/backup' directory, if they do not already exist.\n"
 }
 
 # Modify for English language in dconf (for actual user)
-set_for_current_user_EN_BR() {
+set_for_current_user_BR_EN() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -289,8 +289,8 @@ set_for_current_user_EN_BR() {
     sudo -u "$username" sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us'), ('xkb', 'br')]/g" "$dconf_file"
-
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
     sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
