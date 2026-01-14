@@ -96,8 +96,8 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
   display_help
 fi
 
-# Modify for Portuguese language in central/system dconf (for all new user)
-set_for_all_users_BR_EN() {
+# Modify for Portuguese (Brazilian) language in central/system dconf (for all new user)
+set_for_all_users_EN_BR() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -115,7 +115,7 @@ in the '/root/backup' directory, if they do not already exist.\n"
     cp "$input_sources" /root/backup
   fi
 
-  # Modify for Portuguese language in central/system dconf (for new user)
+  # Modify for Portuguese (Brazilian) language in central/system dconf (for new user)
   sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$app_folders"
   sed -i "s/name='Office'/name='Escritório'/g" "$app_folders"
   sed -i "s/name='Graphics'/name='Gráficos'/g" "$app_folders"
@@ -149,8 +149,8 @@ set_for_current_user_BR_EN() {
     printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
     sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-    # Now modify in dconf.ini file groups programming name for Portuguese language
-    printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
+    # Now modify in dconf.ini file groups programming name for Portuguese (Brazilian) language
+    printf "Now modify the group names for app in dconf.ini file for Portuguese (Brazilian) language\n"
     sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
@@ -184,8 +184,8 @@ set_for_current_user_BR_EN() {
     printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
     cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-    # Now modify in dconf.ini file groups programming name for Portuguese language
-    printf "Now modify the group names for app in dconf.ini file for Portuguese language\n"
+    # Now modify in dconf.ini file groups programming name for Portuguese (Brazilian) language
+    printf "Now modify the group names for app in dconf.ini file for Portuguese (Brazilian) language\n"
     sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
     sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
     sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
