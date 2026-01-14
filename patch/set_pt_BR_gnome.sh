@@ -350,9 +350,37 @@ set_for_current_user_BR_EN() {
 }
 
 set_localize_packages() {
-  # Add other packages for Portuguese language
-  printf "Install other packages for Portuguese (Brazil) language\n\n"
+  # Add other packages for Portuguese (Brazilian) language
+  printf "Install other packages for Portuguese (Brazilian) language\n\n"
   xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
+}
+
+# Modify to Portuguese (Brazilian) language the system
+set_system_language_EN_BR() {
+  printf "Set system language for Portuguese (Brazilian) language\n\n"
+  sed -i "s/#pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/g" /etc/default/libc-locales
+  sed -i "s/LANG=en_US.UTF-8/LANG=pt_BR.UTF-8/g" /etc/locale.conf
+  sed -i "s/KEYMAP=us/KEYMAP=br-abnt2/g" /etc/rc.conf
+  xbps-reconfigure --force glibc-locales
+  update-grub # for loading message in Portuguese (Brazilian) language
+}
+
+# Modify to English language the system
+set_system_language_BR_EN() {
+  printf "Set system language for English language\n\n"
+  # I not change back to '#pt_BR.UTF-8 UTF-8' in '/etc/default/libc-locales',
+  # because can exist in system over users what use Portuguese (Brazilian) language
+  sed -i "s/LANG=pt_BR.UTF-8/LANG=en_US.UTF-8/g" /etc/locale.conf
+  sed -i "s/KEYMAP=br-abnt2/KEYMAP=us/g" /etc/rc.conf
+  xbps-reconfigure --force glibc-locales
+  update-grub # for loading message in English language
+}
+
+# Add Portuguese (Brazilian) language in the system
+add_system_language_pt_BR() {
+  printf "Add Portuguese (Brazilian) language in the system (glibc)\n\n"
+  sed -i "s/#pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/g" /etc/default/libc-locales
+  xbps-reconfigure --force glibc-locales
 }
 
 # Final messages 1
