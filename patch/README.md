@@ -18,6 +18,8 @@ Translate:
 |   Programming   |      Programação       |
 |   Accessories   |       Acessórios       |
 |     System      |        Sistema         |
+|    Internet     |        Internet        |
+|   Multimedia    |       Multimídia       |
 
 Packages:
 
