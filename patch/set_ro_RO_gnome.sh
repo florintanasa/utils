@@ -53,43 +53,43 @@ username=$(logname)
 
 function display_help() {
   echo -e "${bold}${cyan}Usage:${reset}"
-  echo -e "  ./set_pt_BR_gnome.sh [PARAMETER]"
+  echo -e "  ./set_ro_RO_gnome.sh [PARAMETER]"
   echo -e "\n${bold}${cyan}Description:${reset}"
-  echo -e "  This script add modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for all new users and/or actual user"
-  echo -e "  Also, set as keyboard 'br' and install some localized packages xbps."
+  echo -e "  This script add modify for Romanian language, from English to Romanian, in dconf for all new users and/or actual user"
+  echo -e "  Also, set as keyboard 'ro' and install some localized packages xbps."
   echo -e "  If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly"
   echo -e "  If a the user not provide an ARGUMENT appear a menu with some options."
   echo -e "\n${bold}${cyan}Options${reset}:"
-  echo -e "     ${magenta}With PARAMETER\tModify for Portuguese (Brazilian) language, for all new user or actual user.${reset}"
+  echo -e "     ${magenta}With PARAMETER\tModify for Romanian language, for all new user or actual user.${reset}"
   echo -e "  ${yellow}Without PARAMETER\tIs open a options menu with next options:${reset}"
-  echo -e "  ${blue}Option 1 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
-  echo -e "             ${blue}all new users, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 2 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
-  echo -e "             ${blue}current user, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 3 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for${reset}"
-  echo -e "             ${blue}all new users and current user, add 'br' keyboard and add additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 4 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
-  echo -e "             ${blue}all new users, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
-  echo -e "  ${blue}Option 5 - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
-  echo -e "  ${blue}Option 6 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
-  echo -e "             ${blue}current user, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
-  echo -e "  ${blue}Option 7 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for${reset}"
-  echo -e "             ${blue}all new users and current user, set 'us' default keyboard and 'br' secondary keyboard.${reset}"
+  echo -e "  ${blue}Option 1 - Modify for Romanian language, from English to Romanian, in dconf for${reset}"
+  echo -e "             ${blue}all new users, add 'ro' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 2 - Modify for Romanian language, from English to Romanian, in dconf for${reset}"
+  echo -e "             ${blue}current user, add 'ro' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 3 - Modify for Romanian language, from English to Romanian, in dconf for${reset}"
+  echo -e "             ${blue}all new users and current user, add 'ro' keyboard and add additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 4 - Modify for English language, from Romanian to English, in dconf for${reset}"
+  echo -e "             ${blue}all new users, set 'us' default keyboard and 'ro' secondary keyboard.${reset}"
+  echo -e "  ${blue}Option 5 - Enable Romanian language in libc-locales and install additional packages for localized language.${reset}"
+  echo -e "  ${blue}Option 6 - Modify for English language, from Romanian to English, in dconf for${reset}"
+  echo -e "             ${blue}current user, set 'us' default keyboard and 'ro' secondary keyboard.${reset}"
+  echo -e "  ${blue}Option 7 - Modify for English language, from Romanian to English, in dconf for${reset}"
+  echo -e "             ${blue}all new users and current user, set 'us' default keyboard and 'ro' secondary keyboard.${reset}"
   echo -e "  ${red}Option 8 - Exit from script.${reset}"
   echo -e "\n${bold}${cyan}Examples:${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1${reset}\t\t${blue}# Option 1${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2\t${reset}\t${blue}# Option 2${reset}"
-  echo -e "  ${magenta}set_pt_BR_gnome.sh 2\t\t${reset}\t${blue}# Option 2, can be run by current user, but without to install the packages${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 1 2${reset}\t\t${blue}# Option 3${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 2 1${reset}\t\t${blue}# Option 3${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3${reset}\t\t${blue}# Option 4${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4\t${reset}\t${blue}# Option 6${reset}"
-  echo -e "  ${magenta}set_pt_BR_gnome.sh 4\t\t${reset}\t${blue}# Option 6, can be run by current user${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 5\t${reset}\t${blue}# Option 5${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 3 4${reset}\t\t${blue}# Option 7${reset}"
-  echo -e "  ${magenta}sudo set_pt_BR_gnome.sh 4 3${reset}\t\t${blue}# Option 7${reset}"
-  echo -e "  ${yellow}sudo set_pt_BR_gnome.sh$\t\t# Use the menu to choose an option${reset}"
-  echo -e "  set_pt_BR_gnome.sh --help or -h \t# This help."
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 1${reset}\t\t${blue}# Option 1${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 2\t${reset}\t${blue}# Option 2${reset}"
+  echo -e "  ${magenta}set_ro_RO_gnome.sh 2\t\t${reset}\t${blue}# Option 2, can be run by current user, but without to install the packages${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 1 2${reset}\t\t${blue}# Option 3${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 2 1${reset}\t\t${blue}# Option 3${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 3${reset}\t\t${blue}# Option 4${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 4\t${reset}\t${blue}# Option 6${reset}"
+  echo -e "  ${magenta}set_ro_RO_gnome.sh 4\t\t${reset}\t${blue}# Option 6, can be run by current user${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 5\t${reset}\t${blue}# Option 5${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 3 4${reset}\t\t${blue}# Option 7${reset}"
+  echo -e "  ${magenta}sudo set_ro_RO_gnome.sh 4 3${reset}\t\t${blue}# Option 7${reset}"
+  echo -e "  ${yellow}sudo set_ro_RO_gnome.sh$\t\t# Use the menu to choose an option${reset}"
+  echo -e "  set_ro_RO_gnome.sh --help or -h \t# This help."
   exit 0
 }
 
@@ -98,8 +98,8 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
   display_help
 fi
 
-# Modify for Portuguese (Brazilian) language in central/system dconf (for all new user)
-set_for_all_users_EN_BR() {
+# Modify for Romanian language in central/system dconf (for all new user)
+set_for_all_users_EN_RO() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -117,32 +117,32 @@ in the '/root/backup' directory, if they do not already exist.\n"
     cp "$input_sources" /root/backup
   fi
 
-  # Modify for Portuguese (Brazilian) language in central/system dconf (for new user)
-  sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$app_folders"
-  sed -i "s/name='Office'/name='Escritório'/g" "$app_folders"
-  sed -i "s/name='Graphics'/name='Gráficos'/g" "$app_folders"
-  sed -i "s/name='Programming'/name='Programação'/g" "$app_folders"
-  sed -i "s/name='Accessories'/name='Acessórios'/g" "$app_folders"
-  sed -i "s/name='Internet'/name='Internet'/g" "$app_folders"
-  sed -i "s/name='Multimedia'/name='Multimídia'/g" "$app_folders"
-  sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$extensions_arcmenu"
+  # Modify for Romanian language in central/system dconf (for new user)
+  sed -i "s/name='Themes settings'/name='Setări teme'/g"  "$app_folders"
+  sed -i "s/name='Office'/name='Birou'/g" "$app_folders"
+  sed -i "s/name='Graphics'/name='Grafică'/g" "$app_folders"
+  sed -i "s/name='Programming'/name='Programare'/g"  "$app_folders"
+  sed -i "s/name='Accessories'/name='Accesorii'/g" "$app_folders"
+  sed -i "s/name='Internet'/name='Internet'/g"  "$app_folders"
+  sed -i "s/name='Multimedia'/name='Multimedia'/g" "$app_folders"
+  sed -i "s/'name': 'Programming'/'name': 'Programare'/g"  "$extensions_arcmenu"
+  sed -i "s/'name': 'System'/'name': 'Sistem'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Office'/'name': 'Birou'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Multimedia'/'name': 'Multimídia'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
-  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$extensions_arcmenu"
+  sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
   dconf update
 }
 
-# Modify for Portuguese (Brazilian) language in dconf (for actual user)
-set_for_current_user_EN_BR() {
+# Modify for Romanian language in dconf (for actual user)
+set_for_current_user_EN_RO() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -156,25 +156,25 @@ set_for_current_user_EN_BR() {
     printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
     sudo -u "$username" cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-    # Now modify in dconf.ini file groups programming name for Portuguese (Brazilian) language
-    printf "Now modify the group names for app in dconf.ini file for Portuguese (Brazilian) language\n"
-    sudo -u "$username" sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
+    # Now modify in dconf.ini file groups programming name for Romanian language
+    printf "Now modify the group names for app in dconf.ini file for Romanian language\n"
+    sudo -u "$username" sed -i "s/name='Themes settings'/name='Setări teme'/g"  "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Office'/name='Birou'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Graphics'/name='Grafică'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Programming'/name='Programare'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Accessories'/name='Accesorii'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/name='Internet'/name='Internet'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Multimedia'/name='Multimídia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Multimedia'/name='Multimedia'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Programming'/'name': 'Programare'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'System'/'name': 'Sistem'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Office'/'name': 'Birou'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Multimedia'/'name': 'Multimídia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -183,13 +183,13 @@ set_for_current_user_EN_BR() {
     export DBUS_SESSION_BUS_ADDRESS=\$addr;
     dconf load / < \"$dconf_file\""
 
-    # Change the language for current user to Portuguese (Brazilian) 
+    # Change the language for current user to Romanian 
     if [ -f /var/lib/AccountsService/users/"$username" ]; then
-      printf "Change the language, for current user, to Portuguese (Brazilian) at next Logon\n"
+      printf "Change the language, for current user, to Romanian at next Logon\n"
       if cat /var/lib/AccountsService/users/"$username" | grep -q "Languages=en_US.UTF-8;"; then # Check if already set the language to English
-        sed -i "s/Languages=en_US.UTF-8;/Languages=pt_BR.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, change the line and set to Portuguese (Brazilian) language
+        sed -i "s/Languages=en_US.UTF-8;/Languages=ro_RO.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, change the line and set to Romanian language
       else
-        sed -i "2i Languages=pt_BR.UTF-8;" /var/lib/AccountsService/users/"$username" # If not, add the line what set to Portuguese (Brazilian) language before to the second line 
+        sed -i "2i Languages=ro_RO.UTF-8;" /var/lib/AccountsService/users/"$username" # If not, add the line what set to Romanian language before to the second line 
       fi
       # Close the session (Logout)
       sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
@@ -211,25 +211,25 @@ set_for_current_user_EN_BR() {
     printf "Make backup of 'dconf.ini' into 'dconf.bak' file\n"
     cp /home/"$username"/backup/dconf.ini /home/"$username"/backup/dconf.bak
 
-    # Now modify in dconf.ini file groups programming name for Portuguese (Brazilian) language
-    printf "Now modify the group names for app in dconf.ini file for Portuguese (Brazilian) language\n"
-    sed -i "s/name='Themes settings'/name='Configurações de temas'/g" "$dconf_file"
-    sed -i "s/name='Office'/name='Escritório'/g" "$dconf_file"
-    sed -i "s/name='Graphics'/name='Gráficos'/g" "$dconf_file"
-    sed -i "s/name='Programming'/name='Programação'/g" "$dconf_file"
-    sed -i "s/name='Accessories'/name='Acessórios'/g" "$dconf_file"
+    # Now modify in dconf.ini file groups programming name for Romanian language
+    printf "Now modify the group names for app in dconf.ini file for Romanian language\n"
+    sed -i "s/name='Themes settings'/name='Setări teme'/g"  "$dconf_file"
+    sed -i "s/name='Office'/name='Birou'/g" "$dconf_file"
+    sed -i "s/name='Graphics'/name='Grafică'/g" "$dconf_file"
+    sed -i "s/name='Programming'/name='Programare'/g" "$dconf_file"
+    sed -i "s/name='Accessories'/name='Accesorii'/g" "$dconf_file"
     sed -i "s/name='Internet'/name='Internet'/g" "$dconf_file"
-    sed -i "s/name='Multimedia'/name='Multimídia'/g" "$dconf_file"
-    sed -i "s/'name': 'Programming'/'name': 'Programação'/g" "$dconf_file"
-    sed -i "s/'name': 'System'/'name': 'Sistema'/g" "$dconf_file"
-    sed -i "s/'name': 'Office'/'name': 'Escritório'/g" "$dconf_file"
-    sed -i "s/'name': 'Graphics'/'name': 'Gráficos'/g" "$dconf_file"
-    sed -i "s/'name': 'Accessories'/'name': 'Acessórios'/g" "$dconf_file"
-    sed -i "s/'name': 'Themes settings'/'name': 'Configurações de temas'/g" "$dconf_file"
+    sed -i "s/name='Multimedia'/name='Multimedia'/g" "$dconf_file"
+    sed -i "s/'name': 'Programming'/'name': 'Programare'/g" "$dconf_file"
+    sed -i "s/'name': 'System'/'name': 'Sistem'/g" "$dconf_file"
+    sed -i "s/'name': 'Office'/'name': 'Birou'/g" "$dconf_file"
+    sed -i "s/'name': 'Graphics'/'name': 'Grafică'/g" "$dconf_file"
+    sed -i "s/'name': 'Accessories'/'name': 'Accesorii'/g" "$dconf_file"
+    sed -i "s/'name': 'Themes settings'/'name': 'Setări teme'/g" "$dconf_file"
     sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
-    sed -i "s/'name': 'Multimedia'/'name': 'Multimídia'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
-    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'br'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'ro'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -238,7 +238,7 @@ set_for_current_user_EN_BR() {
 }
 
 # Modify for English language for all new user
-set_for_all_users_BR_EN() {
+set_for_all_users_RO_EN() {
   # First make backup for dconf files 27-app-folders, 12-extensions-arcmenu and 01-input-sources in the root directory,
   # if not already exist
   printf "Make backup of dconf files '27-app-folders', '12-extensions-arcmenu', and '01-input-sources'
@@ -257,23 +257,23 @@ in the '/root/backup' directory, if they do not already exist.\n"
   fi
 
   # Modify for English language in dconf for all new users
-  sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$app_folders"
-  sed -i "s/name='Escritório'/name='Office'/g" "$app_folders"
-  sed -i "s/name='Gráficos'/name='Graphics'/g" "$app_folders"
-  sed -i "s/name='Programação'/name='Programming'/g" "$app_folders"
-  sed -i "s/name='Acessórios'/name='Accessories'/g" "$app_folders"
+  sed -i "s/name='Setări teme'/name='Themes settings'/g" "$app_folders"
+  sed -i "s/name='Birou'/name='Office'/g" "$app_folders"
+  sed -i "s/name='Grafică'/name='Graphics'/g" "$app_folders"
+  sed -i "s/name='Programare'/name='Programming'/g" "$app_folders"
+  sed -i "s/name='Accesorii'/name='Accessories'/g" "$app_folders"
   sed -i "s/name='Internet'/name='Internet'/g" "$app_folders"
-  sed -i "s/name='Multimídia'/name='Multimedia'/g" "$app_folders"
-  sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$extensions_arcmenu"
+  sed -i "s/name='Multimedia'/name='Internet'/g" "$app_folders"
+  sed -i "s/'name': 'Programare'/'name': 'Programming'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Sistem'/'name': 'System'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Birou'/'name': 'Office'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Grafică'/'name': 'Graphics'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$extensions_arcmenu"
+  sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g"  "$extensions_arcmenu"
   sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$extensions_arcmenu"
-  sed -i "s/'name': 'Multimídia'/'name': 'Multimedia'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
-  sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g"  "$extensions_arcmenu"
+  sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -281,7 +281,7 @@ in the '/root/backup' directory, if they do not already exist.\n"
 }
 
 # Modify for English language in dconf (for actual user)
-set_for_current_user_BR_EN() {
+set_for_current_user_RO_EN() {
   if [ "$(id -u)" == "0" ]; then # check if is run by root
     # Generate dconf.ini file
     printf "Generate dconf.ini file\n"
@@ -297,23 +297,23 @@ set_for_current_user_BR_EN() {
 
     # Now modify in dconf.ini file groups programming name for English language
     printf "Now modify the group names for app in dconf.ini file for English language\n"
-    sudo -u "$username" sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Setări teme'/name='Themes settings'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Birou'/name='Office'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Grafică'/name='Graphics'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Programare'/name='Programming'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Accesorii'/name='Accessories'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/name='Internet'/name='Internet'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/name='Multimídia'/name='Multimedia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/name='Multimedia'/name='Multimedia'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Programare'/'name': 'Programming'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Sistem'/'name': 'System'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Birou'/'name': 'Office'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Grafică'/'name': 'Graphics'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/'name': 'Multimídia'/'name': 'Multimedia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
     sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
@@ -324,8 +324,8 @@ set_for_current_user_BR_EN() {
     # Change the language for current user to English 
     if [ -f /var/lib/AccountsService/users/"$username" ]; then
       printf "Change the language, for current user, to English at next Logon\n"
-      if cat /var/lib/AccountsService/users/"$username" | grep -q "Languages=pt_BR.UTF-8;"; then # Check if already set the language to Portuguese (Brazilian)
-        sed -i "s/Languages=pt_BR.UTF-8;/Languages=en_US.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, change the line and set to English language
+      if cat /var/lib/AccountsService/users/"$username" | grep -q "Languages=ro_RO.UTF-8;"; then # Check if already set the language to Romanian
+        sed -i "s/Languages=ro_RO.UTF-8;/Languages=en_US.UTF-8;/g" /var/lib/AccountsService/users/"$username" # If yes, change the line and set to English language
       else
         sed -i "2i Languages=en_US.UTF-8;" /var/lib/AccountsService/users/"$username" # If not, add the line what set to English language before to the second line
       fi
@@ -351,23 +351,23 @@ set_for_current_user_BR_EN() {
 
     # Now modify in dconf.ini file groups programming name for English language
     printf "Now modify the group names for app in dconf.ini file for English language\n"
-    sed -i "s/name='Configurações de temas'/name='Themes settings'/g" "$dconf_file"
-    sed -i "s/name='Escritório'/name='Office'/g" "$dconf_file"
-    sed -i "s/name='Gráficos'/name='Graphics'/g" "$dconf_file"
-    sed -i "s/name='Programação'/name='Programming'/g" "$dconf_file"
-    sed -i "s/name='Acessórios'/name='Accessories'/g" "$dconf_file"
+    sed -i "s/name='Setări teme'/name='Themes settings'/g" "$dconf_file"
+    sed -i "s/name='Birou'/name='Office'/g" "$dconf_file"
+    sed -i "s/name='Grafică'/name='Graphics'/g" "$dconf_file"
+    sed -i "s/name='Programare'/name='Programming'/g" "$dconf_file"
+    sed -i "s/name='Accesorii'/name='Accessories'/g" "$dconf_file"
     sed -i "s/name='Internet'/name='Internet'/g" "$dconf_file"
-    sed -i "s/name='Multimídia'/name='Multimedia'/g" "$dconf_file"
-    sed -i "s/'name': 'Programação'/'name': 'Programming'/g" "$dconf_file"
-    sed -i "s/'name': 'Sistema'/'name': 'System'/g" "$dconf_file"
-    sed -i "s/'name': 'Escritório'/'name': 'Office'/g" "$dconf_file"
-    sed -i "s/'name': 'Gráficos'/'name': 'Graphics'/g" "$dconf_file"
-    sed -i "s/'name': 'Acessórios'/'name': 'Accessories'/g" "$dconf_file"
-    sed -i "s/'name': 'Configurações de temas'/'name': 'Themes settings'/g" "$dconf_file"
+    sed -i "s/name='Multimedia'/name='Multimedia'/g" "$dconf_file"
+    sed -i "s/'name': 'Programare'/'name': 'Programming'/g" "$dconf_file"
+    sed -i "s/'name': 'Sistem'/'name': 'System'/g" "$dconf_file"
+    sed -i "s/'name': 'Birou'/'name': 'Office'/g" "$dconf_file"
+    sed -i "s/'name': 'Grafică'/'name': 'Graphics'/g" "$dconf_file"
+    sed -i "s/'name': 'Accesorii'/'name': 'Accessories'/g" "$dconf_file"
+    sed -i "s/'name': 'Setări teme'/'name': 'Themes settings'/g" "$dconf_file"
     sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
-    sed -i "s/'name': 'Multimídia'/'name': 'Multimedia'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
-    sed -i "s/mru-sources=\[('xkb', 'br'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'ro'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -376,38 +376,38 @@ set_for_current_user_BR_EN() {
 }
 
 set_localize_packages() {
-  # Add other packages for Portuguese (Brazilian) language
-  printf "Install other packages for Portuguese (Brazilian) language\n\n"
-  xbps-install -Sy firefox-i18n-pt-BR libreoffice-i18n-pt-BR mythes-pt_BR hyphen-pt_BR manpages-pt-br hunspell-pt_BR
+  # Add other packages for Romanian language
+  printf "Install other packages for Romanian language\n\n"
+  xbps-install -Sy firefox-i18n-ro libreoffice-i18n-ro mythes-ro hyphen-ro manpages-ro hunspell-ro_RO
 }
 
-# Modify to Portuguese (Brazilian) language the system
-set_system_language_EN_BR() {
-  printf "Set system language for Portuguese (Brazilian) language\n\n"
-  sed -i "s/#pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/g" /etc/default/libc-locales
-  sed -i "s/LANG=en_US.UTF-8/LANG=pt_BR.UTF-8/g" /etc/locale.conf
-  sed -i "s/KEYMAP=us/KEYMAP=br-abnt2/g" /etc/rc.conf
-  LANG=pt_BR.UTF-8
+# Modify to Romanian language the system
+set_system_language_EN_RO() {
+  printf "Set system language for Romanian language\n\n"
+  sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
+  sed -i "s/LANG=en_US.UTF-8/LANG=ro_RO.UTF-8/g" /etc/locale.conf
+  sed -i "s/KEYMAP=us/KEYMAP=ro/g" /etc/rc.conf
+  LANG=ro_RO.UTF-8
   xbps-reconfigure --force glibc-locales
-  update-grub # for loading message in Portuguese (Brazilian) language
+  update-grub # for loading message in Romanian language
 }
 
 # Modify to English language the system
-set_system_language_BR_EN() {
+set_system_language_RO_EN() {
   printf "Set system language for English language\n\n"
-  # I not change back to '#pt_BR.UTF-8 UTF-8' in '/etc/default/libc-locales',
-  # because can exist in system over users what use Portuguese (Brazilian) language
-  sed -i "s/LANG=pt_BR.UTF-8/LANG=en_US.UTF-8/g" /etc/locale.conf
-  sed -i "s/KEYMAP=br-abnt2/KEYMAP=us/g" /etc/rc.conf
+  # I not change back to '#ro_RO.UTF-8 UTF-8' in '/etc/default/libc-locales',
+  # because can exist in system over users what use Romanian language
+  sed -i "s/LANG=ro_RO.UTF-8/LANG=en_US.UTF-8/g" /etc/locale.conf
+  sed -i "s/KEYMAP=ro/KEYMAP=us/g" /etc/rc.conf
   LANG=en_US.UTF-8
   xbps-reconfigure --force glibc-locales
   update-grub # for loading message in English language
 }
 
-# Add Portuguese (Brazilian) language in the system
-add_system_language_pt_BR() {
-  printf "Add Portuguese (Brazilian) language in the system (glibc)\n\n"
-  sed -i "s/#pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/g" /etc/default/libc-locales
+# Add Romanian language in the system
+add_system_language_ro_RO() {
+  printf "Add Romanian language in the system (glibc)\n\n"
+  sed -i "s/#ro_RO.UTF-8 UTF-8/ro_RO.UTF-8 UTF-8/g" /etc/default/libc-locales
   xbps-reconfigure --force glibc-locales
 }
 
@@ -477,62 +477,62 @@ Also, is a good idea to archive the files from '/root/backup' or/and to put it i
 if [ $# -eq 0 ]; then
   echo "${blue}Please select an option from menu:${reset}"
 
-  select opt in "EN->BR for the all new users" "EN->BR for the current user" \
-    "EN->BR for all new users and the current user" "Add pt_BR in libc-locales and install additional packages" \
-    "BR->EN for the all new users" "BR->EN for the current user" "BR->EN for all new users and the current user" \
+  select opt in "EN->RO for the all new users" "EN->RO for the current user" \
+    "EN->RO for all new users and the current user" "Add ro_RO in libc-locales and install additional packages" \
+    "RO->EN for the all new users" "RO->EN for the current user" "RO->EN for all new users and the current user" \
     "Exit"; do
     case $opt in
-    "EN->BR for the all new users")
-      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users.${reset}"
-      set_for_all_users_EN_BR
+    "EN->RO for the all new users")
+      echo "${blue}You choose - Modify for Romanian language in dconf for all new users.${reset}"
+      set_for_all_users_EN_RO
       set_localize_packages
-      set_system_language_EN_BR
+      set_system_language_EN_RO
       final_message_1
       break
       ;;
-    "EN->BR for the current user")
-      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for the current user.${reset}"
-      set_for_current_user_EN_BR
+    "EN->RO for the current user")
+      echo "${blue}You choose - Modify for Romanian language in dconf for the current user.${reset}"
+      set_for_current_user_EN_RO
       set_localize_packages
       final_message_2
       break
       ;;
-    "EN->BR for all new users and the current user")
-      echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_EN_BR
-      set_for_current_user_EN_BR
+    "EN->RO for all new users and the current user")
+      echo "${blue}You choose - Modify for Romanian language in dconf for all new users and the current user.${reset}"
+      set_for_all_users_EN_RO
+      set_for_current_user_EN_RO
       set_localize_packages
-      set_system_language_EN_BR
+      set_system_language_EN_RO
       final_message_3
       break
       ;;
-    "Add pt_BR in libc-locales and install additional packages")
-      echo "${blue}You choose - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
-      add_system_language_pt_BR
+    "Add ro_RO in libc-locales and install additional packages")
+      echo "${blue}You choose - Enable Romanian language in libc-locales and install additional packages for localized language.${reset}"
+      add_system_language_ro_RO
       set_localize_packages
       break
       ;;
-    "BR->EN for the all new users")
+    "RO->EN for the all new users")
       echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-      set_for_all_users_BR_EN
+      set_for_all_users_RO_EN
       # localized packages remain because can exist another user what need these
-      set_system_language_BR_EN
+      set_system_language_RO_EN
       final_message_4
       break
       ;;
-    "BR->EN for the current user")
+    "RO->EN for the current user")
       echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-      set_for_current_user_BR_EN
+      set_for_current_user_RO_EN
       # localized packages remain because can exist another user what need these
       final_message_5
       break
       ;;
-    "BR->EN for all new users and the current user")
+    "RO->EN for all new users and the current user")
       echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-      set_for_all_users_BR_EN
-      set_for_current_user_BR_EN
+      set_for_all_users_RO_EN
+      set_for_current_user_RO_EN
       # localized packages remain because can exist another user what need these
-      set_system_language_BR_EN
+      set_system_language_RO_EN
       final_message_6
       break
       ;;
@@ -548,19 +548,19 @@ if [ $# -eq 0 ]; then
 else
   # If a parameter was send is executed directly
   if [[ "$1" == "1" && "$2" == "2" ]] || [[ "$1" == "2" && "$2" == "1" ]]; then
-    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_EN_BR
-    set_for_current_user_EN_BR
+    echo "${blue}You choose - Modify for Romanian language in dconf for all new users and the current user.${reset}"
+    set_for_all_users_EN_RO
+    set_for_current_user_EN_RO
     set_localize_packages
-    set_system_language_EN_BR
+    set_system_language_EN_RO
   elif [ "$1" == "1" ]; then
-    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for all new users.${reset}"
-    set_for_all_users_EN_BR
+    echo "${blue}You choose - Modify for Romanian language in dconf for all new users.${reset}"
+    set_for_all_users_EN_RO
     set_localize_packages
-    set_system_language_EN_BR
+    set_system_language_EN_RO
   elif [ "$1" == "2" ]; then
-    echo "${blue}You choose - Modify for Portuguese (Brazilian) language in dconf for the current user.${reset}"
-    set_for_current_user_EN_BR
+    echo "${blue}You choose - Modify for Romanian language in dconf for the current user.${reset}"
+    set_for_current_user_EN_RO
     if [ "$(id -u)" == "0" ]; then # check if is run by root
       set_localize_packages
     else
@@ -568,31 +568,31 @@ else
     fi
   elif [[ "$1" == "3" && "$2" == "4" ]] || [[ "$1" == "4" && "$2" == "3" ]]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users and the current user.${reset}"
-    set_for_all_users_BR_EN
-    set_for_current_user_BR_EN
+    set_for_all_users_RO_EN
+    set_for_current_user_RO_EN
     # localized packages remain because can exist another user what need these
-    set_system_language_BR_EN
+    set_system_language_RO_EN
   elif [ "$1" == "3" ]; then
     echo "${blue}You choose - Modify for English language in dconf for all new users.${reset}"
-    set_for_all_users_BR_EN
+    set_for_all_users_RO_EN
     # localized packages remain because can exist another user what need these
-    set_system_language_BR_EN
+    set_system_language_RO_EN
   elif [ "$1" == "4" ]; then
     echo "${blue}You choose - Modify for English language in dconf for the current user.${reset}"
-    set_for_current_user_BR_EN
+    set_for_current_user_RO_EN
     # localized packages remain because can exist other users what need these
   elif [ "$1" == "5" ]; then
-    echo "${blue}You choose - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.${reset}"
-    add_system_language_pt_BR
+    echo "${blue}You choose - Enable Romanian language in libc-locales and install additional packages for localized language.${reset}"
+    add_system_language_ro_RO
     set_localize_packages
   else
     echo -e "${red}Invalid parameter. Please use for parameters numbers:\n
-    '1' to Modify for Portuguese (Brazilian) language in system dconf, for all new users;
-    '2' to Modify for Portuguese (Brazilian) language in dconf, for the current user;
-    '1' '2' or '2' '1' to Modify for Portuguese (Brazilian) language in system dconf, for all new users and for current user;\n
+    '1' to Modify for Romanian language in system dconf, for all new users;
+    '2' to Modify for Romanian language in dconf, for the current user;
+    '1' '2' or '2' '1' to Modify for Romanian language in system dconf, for all new users and for current user;\n
     '3' to Modify for English language in system dconf, for all new users;
     '4' to Modify for English language in dconf, for the current user;
     '3' '4' or '2' '1' to Modify for English language in system dconf, for all new users and for current user;\n
-    Run './set_pt_BR_gnome.sh --help or -h for more help.'${reset}"
+    Run './set_ro_RO_gnome.sh --help or -h for more help.'${reset}"
   fi
 fi
