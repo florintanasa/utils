@@ -51,49 +51,50 @@ The last command display next info help messages:
 ```text
 Run the script for current user, only for parameters '2', '4' or '--help'
 Usage:
-./set_pt_BR_gnome.sh [PARAMETER]
+  ./set_pt_BR_gnome.sh [PARAMETER]
 
 Description:
-This script add modify for Portuguese language, from English to Portuguese, in dconf for all new users and/or actual user
-Also, set as keyboard 'br' and install some localized packages xbps.
-If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly
-If a the user not provide an ARGUMENT appear a menu with some options.
+  This script add modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for all new users and/or actual user
+  Also, set as keyboard 'br' and install some localized packages xbps.
+  If a the user provide an ARGUMENT, like '1' or '2' or '1 2' this script is run directly
+  If a the user not provide an ARGUMENT appear a menu with some options.
 
 Options:
-With PARAMETER     Modify for Portuguese language, for all new user or actual user.
-Without PARAMETER     Is open a options menu with next options:
-Option 1 - Modify for Portuguese language, from English to Portuguese, in dconf for
-all new users, add 'br' keyboard and add additional packages for localized language.
-Option 2 - Modify for Portuguese language, from English to Portuguese, in dconf for
-current user, add 'br' keyboard and add additional packages for localized language.
-Option 3 - Modify for Portuguese language, from English to Portuguese, in dconf for
-all new users and current user, add 'br' keyboard and add additional packages for localized language.
-Option 4 - Modify for English language, from Portuguese to English, in dconf for
-all new users, set 'us' default keyboard and 'br' secondary keyboard.
-Option 5 - Modify for English language, from Portuguese to English, in dconf for
-current user, set 'us' default keyboard and 'br' secondary keyboard.
-Option 6 - Modify for English language, from Portuguese to English, in dconf for
-all new users and current user, set 'us' default keyboard and 'br' secondary keyboard.
-Option 7 - Exit from script.
+     With PARAMETER     Modify for Portuguese (Brazilian) language, for all new user or actual user.
+  Without PARAMETER     Is open a options menu with next options:
+  Option 1 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for
+             all new users, add 'br' keyboard and add additional packages for localized language.
+  Option 2 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for
+             current user, add 'br' keyboard and add additional packages for localized language.
+  Option 3 - Modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for
+             all new users and current user, add 'br' keyboard and add additional packages for localized language.
+  Option 4 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for
+             all new users, set 'us' default keyboard and 'br' secondary keyboard.
+  Option 5 - Enable Portuguese (Brazilian) language in libc-locales and install additional packages for localized language.
+  Option 6 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for
+             current user, set 'us' default keyboard and 'br' secondary keyboard.
+  Option 7 - Modify for English language, from Portuguese (Brazilian) to English, in dconf for
+             all new users and current user, set 'us' default keyboard and 'br' secondary keyboard.
+  Option 8 - Exit from script.
 
 Examples:
-sudo set_pt_BR_gnome.sh 1             # Option 1
-sudo set_pt_BR_gnome.sh 2             # Option 2
-set_pt_BR_gnome.sh 2                  # Option 2, can be run by current user, but without to install the packages
-sudo set_pt_BR_gnome.sh 1 2           # Option 3
-sudo set_pt_BR_gnome.sh 2 1           # Option 3
-sudo set_pt_BR_gnome.sh 3             # Option 4
-sudo set_pt_BR_gnome.sh 4             # Option 5
-set_pt_BR_gnome.sh 4                  # Option 5, can be run by current user
-sudo set_pt_BR_gnome.sh 3 4           # Option 6
-sudo set_pt_BR_gnome.sh 4 3           # Option 6
-sudo set_pt_BR_gnome.sh$              # Use the menu to choose an option
-set_pt_BR_gnome.sh --help or -h       # This help.
+  sudo set_pt_BR_gnome.sh 1             # Option 1
+  sudo set_pt_BR_gnome.sh 2             # Option 2
+  set_pt_BR_gnome.sh 2                  # Option 2, can be run by current user, but without to install the packages
+  sudo set_pt_BR_gnome.sh 1 2           # Option 3
+  sudo set_pt_BR_gnome.sh 2 1           # Option 3
+  sudo set_pt_BR_gnome.sh 3             # Option 4
+  sudo set_pt_BR_gnome.sh 4             # Option 6
+  set_pt_BR_gnome.sh 4                  # Option 6, can be run by current user
+  sudo set_pt_BR_gnome.sh 5             # Option 5
+  sudo set_pt_BR_gnome.sh 3 4           # Option 7
+  sudo set_pt_BR_gnome.sh 4 3           # Option 7
+  sudo set_pt_BR_gnome.sh$              # Use the menu to choose an option
+  set_pt_BR_gnome.sh --help or -h       # This help.
 ```
-In the following video, you found how to use the patch and another example of how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void) on the
-localized language pt_BR.
+In the following video, you found how to use the patches and another example of how to install [**BRGV-OS**](https://github.com/florintanasa/brgvos-void)
 
-[<img src="https://img.youtube.com/vi/AD9lnR4zPTw/maxresdefault.jpg" width="960" height="510"/>](https://www.youtube.com/embed/AD9lnR4zPTw?autoplay=1&mute=1)
+[<img src="https://img.youtube.com/vi/pN8bdZ6Hw88/maxresdefault.jpg" width="960" height="510"/>](https://www.youtube.com/embed/pN8bdZ6Hw88?autoplay=1&mute=1)
 
 ### $`\textcolor{teal}{\texttt{set\_distro.sh}}`$
 This script add modification at os-release and lsb_release file for [**BRGV-OS**](https://github.com/florintanasa/brgvos-void).
