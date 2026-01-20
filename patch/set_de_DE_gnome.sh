@@ -133,8 +133,8 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Themes settings'/'name': 'Themen-Einstellungen'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$extensions_arcmenu"
-  sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('de'), ('xkb', 'us')]/g" "$input_sources"
-  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('de'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -173,8 +173,8 @@ set_for_current_user_EN_DE() {
     sudo -u "$username" sed -i "s/'name': 'Themes settings'/'name': 'Themen-Einstellungen'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('de'), ('xkb', 'us')]/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('de'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -228,8 +228,8 @@ set_for_current_user_EN_DE() {
     sed -i "s/'name': 'Themes settings'/'name': 'Themen-Einstellungen'/g" "$dconf_file"
     sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
     sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
-    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('de'), ('xkb', 'us')]/g" "$dconf_file"
-    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('de'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'us')]\s*/sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'us')]\s*/mru-sources=[('xkb', 'de'), ('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
@@ -272,8 +272,8 @@ in the '/root/backup' directory, if they do not already exist.\n"
   sed -i "s/'name': 'Themen-Einstellungen'/'name': 'Themes settings'/g"  "$extensions_arcmenu"
   sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$extensions_arcmenu"
   sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g"  "$extensions_arcmenu"
-  sed -i "s/sources=\[('de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
-  sed -i "s/mru-sources=\[('de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
+  sed -i "s/sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g"  "$input_sources"
+  sed -i "s/mru-sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$input_sources"
 
   # Update dconf database
   printf "Update dconf database\n"
@@ -312,8 +312,8 @@ set_for_current_user_DE_EN() {
     sudo -u "$username" sed -i "s/'name': 'Themen-Einstellungen'/'name': 'Themes settings'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
     sudo -u "$username" sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/sources=\[('de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
-    sudo -u "$username" sed -i "s/mru-sources=\[('de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sudo -u "$username" sed -i "s/mru-sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
     sudo -u "$username" bash -c "pid=\$(pgrep -u \$USER -n gnome-shell);
@@ -366,8 +366,8 @@ set_for_current_user_DE_EN() {
     sed -i "s/'name': 'Themen-Einstellungen'/'name': 'Themes settings'/g" "$dconf_file"
     sed -i "s/'name': 'Internet'/'name': 'Internet'/g" "$dconf_file"
     sed -i "s/'name': 'Multimedia'/'name': 'Multimedia'/g" "$dconf_file"
-    sed -i "s/sources=\[('de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
-    sed -i "s/mru-sources=\[('de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/sources=[('xkb', 'us')]/g" "$dconf_file"
+    sed -i "s/mru-sources=\[('xkb', 'de'), ('xkb', 'us')]\s*/mru-sources=[('xkb', 'us')]/g" "$dconf_file"
 
     # Load modified configs from dconf.ini file
     printf "Load modified configs from dconf.ini file\n\n"
