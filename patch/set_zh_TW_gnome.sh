@@ -385,7 +385,7 @@ set_localize_packages() {
 set_system_language_EN_TW() {
   printf "Set system language for Chinese (Taiwan) language\n\n"
   sed -i "s/#zh_TW.UTF-8 UTF-8/zh_TW.UTF-8 UTF-8/g" /etc/default/libc-locales
-  sed -i "s/LANG=en_US.UTF-8/LANG=zh_TW.UTF-8 UTF-8/g" /etc/locale.conf
+  sed -i "s/LANG=en_US.UTF-8/LANG=zh_TW.UTF-8/g" /etc/locale.conf
   sed -i "s/KEYMAP=us/KEYMAP=us/g" /etc/rc.conf
   LANG=zh_TW.UTF-8
   xbps-reconfigure --force glibc-locales
