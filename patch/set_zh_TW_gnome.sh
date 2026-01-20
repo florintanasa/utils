@@ -53,7 +53,7 @@ username=$(logname)
 
 function display_help() {
   echo -e "${bold}${cyan}Usage:${reset}"
-  echo -e "  ./set_zh_TW_gnome.sh [PARAMETER]"
+  echo -e "\tset_zh_TW_gnome.sh [PARAMETER]"
   echo -e "\n${bold}${cyan}Description:${reset}"
   echo -e "  This script add modify for Chinese (Taiwan) language, from English to Chinese (Taiwan), in dconf for the system and/or actual user"
   echo -e "  Also, set as keyboard 'ibus', 'chewing' and install some localized packages xbps."
