@@ -53,7 +53,7 @@ username=$(logname)
 
 function display_help() {
   echo -e "${bold}${cyan}Usage:${reset}"
-  echo -e "  ./set_pt_BR_gnome.sh [PARAMETER]"
+  echo -e "\tset_pt_BR_gnome.sh [PARAMETER]"
   echo -e "\n${bold}${cyan}Description:${reset}"
   echo -e "  This script add modify for Portuguese (Brazilian) language, from English to Portuguese (Brazilian), in dconf for the system and/or actual user"
   echo -e "  Also, set as keyboard 'br' and install some localized packages xbps."
