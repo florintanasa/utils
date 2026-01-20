@@ -385,7 +385,7 @@ set_localize_packages() {
 set_system_language_EN_DE() {
   printf "Set system language for German language\n\n"
   sed -i "s/#de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/g" /etc/default/libc-locales
-  sed -i "s/LANG=en_US.UTF-8/LANG=de_DE.UTF-8 UTF-8/g" /etc/locale.conf
+  sed -i "s/LANG=en_US.UTF-8/LANG=de_DE.UTF-8/g" /etc/locale.conf
   sed -i "s/KEYMAP=us/KEYMAP=de/g" /etc/rc.conf
   LANG=de_DE.UTF-8
   xbps-reconfigure --force glibc-locales
