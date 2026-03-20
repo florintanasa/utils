@@ -28,6 +28,20 @@ for p in 8000 9443; do
   fi
 done
 
+# Ensure the bridge network 'punte' not exist
+if ! docker network inspect punte >/dev/null 2>&1; then
+    printf "Creating network 'punte'... "
+    docker network create \
+        --driver bridge \
+        --subnet 172.18.1.0/24 \
+        --ip-range 172.18.1.128/25 \
+        punte || error "Failed to create network."
+    echo "Done."
+else
+    echo "Network 'punte' already exists."
+    exit 1
+fi
+
 # Create the volume (idempotent)
 docker volume inspect portainer_data >/dev/null 2>&1 \
   || docker volume create portainer_data || error "Failed to create volume."
@@ -39,6 +53,7 @@ docker run -d --pull=always \
     --restart=always \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v portainer_data:/data \
+    --network=punte --ip 172.18.1.2 \
     portainer/portainer-ce:sts \
   || error "Failed to start Portainer container."
 
