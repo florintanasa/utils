@@ -17,6 +17,7 @@ check_internet() {
   curl -fsI https://github.com >/dev/null || error "Offline. Connect to the internet and retry."
   echo "Online."
 }
+
 check_internet
 
 # Identify existing Portainer container and image
@@ -36,14 +37,17 @@ fi
 docker volume inspect portainer_data >/dev/null 2>&1 || \
   docker volume create portainer_data || error "Failed to create volume."
 
-docker pull portainer/portainer-ce:sts || error "Failed to pull latest Portainer image."
+docker pull portainer/portainer-ce:"$Version" || error "Failed to pull latest Portainer image."
 
-docker run -d \
-  -p 8000:8000 -p 9443:9443 \
-  --name portainer \
-  --restart=always \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v portainer_data:/data \
-  portainer/portainer-ce:sts || error "Failed to start Portainer container."
+# Pull the latest image and start the container
+docker run -d --pull=always \
+    -p 8000:8000 -p 9443:9443 \
+    --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    --network="$NETname" --ip "$IPstatic" \
+    portainer/portainer-ce:"$Version" \
+  || error "Failed to start Portainer container."
 
-printf "Portainer update completed successfully.\n"
+printf "\nPortainer update completed successfully.\n"
