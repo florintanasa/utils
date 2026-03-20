@@ -24,9 +24,8 @@ check_internet
 
 # Ensure the portainer container is not already exist
 if docker ps -a -q --filter "name=^/portainer$" | grep -q .; then
-    echo "A container named 'portainer' already exists."
-    echo "You can stop and remove first using: docker stop portainer && docker rm portainer"
-    exit 1
+    error 'A container named 'portainer' already exists.\n
+You can stop and remove first using: docker stop portainer && docker rm portainer'
 fi
 
 # Ensure the required ports are free
