@@ -35,21 +35,20 @@ for p in 8000 9443; do
   fi
 done
 
-# Ensure the bridge network 'punte' not exist
-if ! docker network inspect punte >/dev/null 2>&1; then
+# Ensure the bridge network '$NETname' not exist
+if ! docker network inspect "$NETname" >/dev/null 2>&1; then
     printf "Creating network 'punte'... "
     docker network create \
         --driver bridge \
-        --subnet 172.18.1.0/24 \
-        --ip-range 172.18.1.128/25 \
-        punte || error "Failed to create network."
+        --subnet "$Subnet" \
+        --ip-range "$IPrange" \
+        "$NETname" || error "Failed to create network."
     echo "Done."
 else
-    echo "Network 'punte' already exists."
-    exit 1
+    error "Network $NETname already exists."
 fi
 
-# Create the volume (idempotent)
+# Create the volume
 docker volume inspect portainer_data >/dev/null 2>&1 \
   || docker volume create portainer_data || error "Failed to create volume."
 
