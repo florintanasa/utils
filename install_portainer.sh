@@ -59,8 +59,8 @@ docker run -d --pull=always \
     --restart=always \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v portainer_data:/data \
-    --network=punte --ip 172.18.1.2 \
-    portainer/portainer-ce:sts \
+    --network="$NETname" --ip "$IPstatic" \
+    portainer/portainer-ce:"$Version" \
   || error "Failed to start Portainer container."
 
-printf "Portainer installed successfully.\n"
+printf "\nPortainer installed successfully.\n"
