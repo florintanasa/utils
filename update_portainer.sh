@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Declare some variable
+NETname="punte"
+IPstatic="172.18.2.2"
+#Version="sts" # Short Term Support
+Version="latest" # Long Term Support
+
 error() {
   echo -e "\e[91m$1\e[39m"
   exit 1
