@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Declare some variable
+BridgeName="br_docker0"
 NETname="punte"
 Subnet="172.18.2.0/24"
 IPrange="172.18.2.128/25"
@@ -37,11 +38,12 @@ done
 
 # Ensure the bridge network '$NETname' not exist
 if ! docker network inspect "$NETname" >/dev/null 2>&1; then
-    printf "Creating network 'punte'... "
+    echo "Creating network $NETname... "
     docker network create \
         --driver bridge \
         --subnet "$Subnet" \
         --ip-range "$IPrange" \
+        -o "com.docker.network.bridge.name"="$BridgeName" \
         "$NETname" || error "Failed to create network."
     echo "Done."
 else
